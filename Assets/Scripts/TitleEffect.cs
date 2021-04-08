@@ -5,18 +5,13 @@ using UnityEngine;
 public class TitleEffect : MonoBehaviour
 {
     public GameObject[] talkBubble;
-    //public GameObject cover;
     void Start()
     {
-        StartCoroutine(TalkBubble());
-    }
-    void Update()
-    {
-        
+        TalkBubbleActive(false);                //¸»Ç³¼± ²ô±â
+        StartCoroutine(TalkBubble());      //Â÷·Ê·Î ÄÑÁÖ±â
     }
     IEnumerator TalkBubble()
     {
-        TalkBubbleActive(false);
         yield return new WaitForSeconds(1);
         for (int i = 0; i < talkBubble.Length; i++)
         {
