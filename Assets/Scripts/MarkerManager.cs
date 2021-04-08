@@ -5,10 +5,13 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 [System.Serializable]
-public struct TargetInfo
+public class TargetInfo
 {
     public string name;
-    public GameObject targetObj;
+    public GameObject targetPref;
+
+    [HideInInspector]
+    public GameObject createdObj;
 }
 
 public class MarkerManager : MonoBehaviour
@@ -49,15 +52,26 @@ public class MarkerManager : MonoBehaviour
                 .ToList()
                 .ForEach(ti => {
                     if (ti.trackingState == TrackingState.Tracking) {
-                        Vector3 targetNewPosition = ti.transform.position;
+                        // 화면에 이미지가 보이는 경우
 
-                        target.targetObj.SetActive(true);
-                        target.targetObj.transform.SetParent(ti.transform);
-                        target.targetObj.transform.localPosition = Vector3.zero;
-                        target.targetObj.transform.localRotation = Quaternion.identity;
-                        target.targetObj.transform.SetParent(null, true);
+                        if (target.createdObj == null) {
+                            // 오브젝트가 아직 생성되지 않았으면 새로 생성
+                            target.createdObj = Instantiate(target.targetPref);
+                        } 
+
+                        // 오브젝트 위치, 회전값 초기화
+                        target.createdObj.transform.SetParent(ti.transform);
+                        target.createdObj.transform.localPosition = Vector3.zero;
+                        target.createdObj.transform.localRotation = Quaternion.identity;
+                        target.createdObj.transform.SetParent(null, true);
                     } else {
-                        target.targetObj.SetActive(false);
+                        // 화면에서 이미지가 사라진 경우
+
+                        if (target.createdObj != null) {
+                            // 만들어진 오브젝트가 있으면 파괴
+                            Destroy(target.createdObj);
+                            target.createdObj = null;
+                        } 
                     }
                 });
         });
