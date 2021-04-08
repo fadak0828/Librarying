@@ -12,11 +12,11 @@ public class TitleEffect : MonoBehaviour
     }
     IEnumerator TalkBubble()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < talkBubble.Length; i++)
         {
             talkBubble[i].SetActive(true);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
         }
     }
     void TalkBubbleActive(bool active)
