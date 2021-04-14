@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SeungHyung : MonoBehaviour
 {
-    public float speed = 2;
     void Start()
     {
         
@@ -12,6 +11,5 @@ public class SeungHyung : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(transform.forward * Time.deltaTime * speed);
     }
 }

@@ -37,9 +37,9 @@ public class PulleyBasket : MonoBehaviour
     }
 
     void OnDrawGizmosSelected()
-     {
-         // 무게 감지 범위 씬뷰에 그리기
-         Gizmos.color = Color.red;
-         Gizmos.DrawWireCube(transform.position + offset, massCheckBounds);
-     }
+    {
+        // 무게 감지 범위 씬뷰에 그리기
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + offset, massCheckBounds);
+    }
 }
