@@ -66,9 +66,11 @@ public class CardPlacement : MonoBehaviour
     }
 
     private void ExcuteCard() {
-        GameObject effect = Instantiate(effectPref, transform);
-        effect.transform.SetParent(null);
-        
+        if (effectPref) {
+            GameObject effect = Instantiate(effectPref, transform);
+            effect.transform.SetParent(null);
+        }
+
         currentPlacementTime = 0;
         isExcuted = true;
         spawnList.Add(Instantiate(targetjPref, transform.position, transform.rotation));

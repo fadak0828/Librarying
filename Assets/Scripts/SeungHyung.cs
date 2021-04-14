@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SeungHyung : MonoBehaviour
 {
-    void Start()
-    {
-        
+    private void Update() {
     }
 
-    void Update()
-    {
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.name.Contains("Basket")) {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 }

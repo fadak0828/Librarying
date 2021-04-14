@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using Constants;
 
 public class Dino : MonoBehaviour
@@ -13,22 +14,20 @@ public class Dino : MonoBehaviour
 
     private void Awake() {
         _renderer = GetComponent<Renderer>();
+        _renderer.material = new Material(_renderer.material);
     }
     
     void Update()
     {
-        UpdateMaterial();
-    }
+        Vector3 center = _renderer.bounds.center;
+        float radius = _renderer.bounds.extents.magnitude;
+        
+        bool isInHole = Physics.OverlapBox(center, Vector3.one * radius, transform.rotation, LayerMask.GetMask(Tag.HOLE_BOUNDS)).Length > 0;
 
-    private void UpdateMaterial() {
-        if (transform.localPosition.y >= escapeHeight) {
-            if (_renderer.material != originMat) {
-                _renderer.material = originMat;
-            }
+        if (isInHole) {
+            _renderer.material.SetInt("_StencilComp", 3);
         } else {
-            if (_renderer.material != stencilMat) {
-                _renderer.material = stencilMat;
-            }
+            _renderer.material.SetInt("_StencilComp", 0);
         }
     }
 }
