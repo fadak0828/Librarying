@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleEffect : MonoBehaviour
+public class BookCoverEffect : MonoBehaviour
 {
     public GameObject[] talkBubble;
     void Start()
