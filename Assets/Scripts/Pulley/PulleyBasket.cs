@@ -10,6 +10,8 @@ public class PulleyBasket : MonoBehaviour
     public float destinationY;
     public Vector3 massCheckBounds = new Vector3(0.056f, 0.038f, 0.056f);
     public Vector3 offset = new Vector3(0, 0.005f, 0);
+    public Collider m_Collider;
+    private Vector3 colliderSize;
 
     [HideInInspector]
     public float speed;
@@ -18,6 +20,7 @@ public class PulleyBasket : MonoBehaviour
     private void Awake() {
         rb = GetComponent<Rigidbody>();
         destinationY = transform.position.y;
+        colliderSize = m_Collider.bounds.size;
     }
 
     public void FixedUpdate() {
@@ -29,17 +32,24 @@ public class PulleyBasket : MonoBehaviour
 
         rb.MovePosition(cur + (dir * Time.deltaTime * speed));
 
-        PulleyMass[] massArr = Physics.OverlapBox(transform.position + offset, massCheckBounds, Quaternion.identity)
-                                    .Select(c => c.GetComponent<PulleyMass>())
-                                    .Where(pulleyMass => pulleyMass != null)
-                                    .ToArray();
-        mass = massArr.Select(pulleyMass => pulleyMass.mass).Sum();
+        mass = Physics.OverlapBox(m_Collider.transform.position, colliderSize / 2, transform.rotation)
+                        .Select(obj => obj.GetComponent<PulleyMass>())
+                        .Where(pm => pm != null)
+                        .Select(pm => pm.mass)
+                        .Sum();
     }
 
-    void OnDrawGizmosSelected()
-    {
-        // 무게 감지 범위 씬뷰에 그리기
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + offset, massCheckBounds);
-    }
+    // private void OnTriggerEnter(Collider other) {
+    //     PulleyMass pulleyMass = other.gameObject.GetComponent<PulleyMass>();
+    //     if (pulleyMass) {
+    //         mass += pulleyMass.mass;
+    //     }    
+    // }
+
+    // private void OnTriggerExit(Collider other) {
+    //     PulleyMass pulleyMass = other.gameObject.GetComponent<PulleyMass>();
+    //     if (pulleyMass) {
+    //         mass -= pulleyMass.mass;
+    //     }   
+    // }
 }

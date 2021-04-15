@@ -22,8 +22,11 @@ public class SeungHyungFactory : MonoBehaviour
             // pos.y = 0.03f;
 
             GameObject sh = Instantiate(seungHyungPref);
+            sh.transform.parent = null;
             sh.transform.position = pos;
+            sh.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
             sh.transform.parent = seungHyungPositions[i];
+            sh.transform.localRotation = Quaternion.identity;
 
             yield return new WaitForSeconds(interval);
         }

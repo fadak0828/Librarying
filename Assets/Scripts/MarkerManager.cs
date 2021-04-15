@@ -14,7 +14,7 @@ public class TargetInfo
     public bool enableTracking = true;
 
     [Tooltip("이미지 따라서 회전할 것인지?")]
-    public bool enableRotation = true;
+    public bool trackingRoation = true;
 
     [Tooltip("이미지가 안보이면 파괴할 것인지?")]
     public bool dontDestory = false;
@@ -66,26 +66,21 @@ public class MarkerManager : MonoBehaviour
                         if (target.createdObj == null) {
                             // 오브젝트가 아직 생성되지 않았으면 새로 생성
                             target.createdObj = Instantiate(target.targetPref);
-                            target.createdObj.transform.SetParent(ti.transform);
-                            target.createdObj.transform.localPosition = Vector3.zero;
-                            target.createdObj.transform.localRotation = Quaternion.identity;
-                            target.createdObj.transform.SetParent(null, true);
                         }
 
                         target.createdObj.SetActive(true);
 
-                        if (target.enableRotation || target.enableTracking) {
+                        if (target.trackingRoation || target.enableTracking) {
                             // 오브젝트 위치, 회전값 초기화
-                            target.createdObj.transform.SetParent(ti.transform);
+                            target.createdObj.transform.parent = ti.transform;
                             if (target.enableTracking) {
                                 target.createdObj.transform.localPosition = Vector3.zero;
-                            } 
-                            if (target.enableRotation) {
+                            }
+                            if (target.trackingRoation) {
                                 target.createdObj.transform.localRotation = Quaternion.identity;
                             }
-                            target.createdObj.transform.SetParent(null, true);
+                            target.createdObj.transform.parent = null;
                         }
-
                     } else {
                         // 화면에서 이미지가 사라진 경우
                         if (target.createdObj != null) {

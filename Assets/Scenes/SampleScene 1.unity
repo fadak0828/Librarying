@@ -328,16 +328,44 @@ MonoBehaviour:
   targetList:
   - name: BreadFactory
     enableTracking: 1
-    enableRotation: 0
-    dontDestory: 1
-    targetPref: {fileID: 411886258892680934, guid: f6aa362772d1894449a1fe71ce78493f,
+    trackingRoation: 1
+    dontDestory: 0
+    targetPref: {fileID: 7699907635423108408, guid: 2d1f315bb8946634c856fe97372fada6,
       type: 3}
     createdObj: {fileID: 0}
   - name: SeungHyungFactory
     enableTracking: 1
-    enableRotation: 1
+    trackingRoation: 1
     dontDestory: 0
     targetPref: {fileID: 8502108251575152019, guid: ab5f35bd7f4d5da4aa8d15c97a995d87,
+      type: 3}
+    createdObj: {fileID: 0}
+  - name: Page1
+    enableTracking: 1
+    trackingRoation: 1
+    dontDestory: 0
+    targetPref: {fileID: 3303274497570953052, guid: 3511bc47baef7024d9914487938a0268,
+      type: 3}
+    createdObj: {fileID: 0}
+  - name: Page2
+    enableTracking: 1
+    trackingRoation: 1
+    dontDestory: 1
+    targetPref: {fileID: 411886258892680934, guid: f6aa362772d1894449a1fe71ce78493f,
+      type: 3}
+    createdObj: {fileID: 0}
+  - name: Page3
+    enableTracking: 1
+    trackingRoation: 1
+    dontDestory: 0
+    targetPref: {fileID: 8162473334381622424, guid: 3e5365af15b30c44d982a88d9f3f06cd,
+      type: 3}
+    createdObj: {fileID: 0}
+  - name: Happy
+    enableTracking: 1
+    trackingRoation: 1
+    dontDestory: 0
+    targetPref: {fileID: 8216491619324878824, guid: 7b2d2a647a89c2d4094fe9eca67e29cc,
       type: 3}
     createdObj: {fileID: 0}
 --- !u!1 &705507993
@@ -433,7 +461,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &857669477
+--- !u!1001 &911794390
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -458,7 +486,7 @@ PrefabInstance:
     - target: {fileID: 8502108251575152030, guid: ab5f35bd7f4d5da4aa8d15c97a995d87,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2712
+      value: 0.2355
       objectReference: {fileID: 0}
     - target: {fileID: 8502108251575152030, guid: ab5f35bd7f4d5da4aa8d15c97a995d87,
         type: 3}
@@ -507,21 +535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5f35bd7f4d5da4aa8d15c97a995d87, type: 3}
---- !u!4 &212175866532230322
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672308126474732643}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5288285087909500492
+--- !u!1001 &1974053190
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -583,6 +597,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 411886258892680863, guid: f6aa362772d1894449a1fe71ce78493f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 411886258892680934, guid: f6aa362772d1894449a1fe71ce78493f,
         type: 3}
       propertyPath: m_Name
@@ -595,6 +614,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6aa362772d1894449a1fe71ce78493f, type: 3}
+--- !u!4 &212175866532230322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6672308126474732643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5434462552450501220
 MonoBehaviour:
   m_ObjectHideFlags: 0
