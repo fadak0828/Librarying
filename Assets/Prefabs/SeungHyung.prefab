@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1166110002684468317}
   - component: {fileID: -4670000413892480219}
   - component: {fileID: -6064037177341478407}
+  - component: {fileID: 3148756530371519332}
   m_Layer: 0
   m_Name: SeungHyung
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7f0415667585d9949b9de0a9316a1df0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0432a75f8117ca48a1c5c8025f0ba81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnEffectPref: {fileID: 115174, guid: fc342acca817cfe45b938043eb78096e, type: 3}
 --- !u!136 &-4670000413892480219
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -140,3 +142,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &3148756530371519332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7068409135661581751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13935b1f7fad554aa083a9ac96368f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

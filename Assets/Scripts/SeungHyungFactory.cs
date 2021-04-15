@@ -19,7 +19,7 @@ public class SeungHyungFactory : MonoBehaviour
         for (int i = 0; i < seungHyungPositions.Length; i++)
         {
             Vector3 pos = seungHyungPositions[i].position;
-            pos.y = 0.03f;
+            // pos.y = 0.03f;
 
             GameObject sh = Instantiate(seungHyungPref);
             sh.transform.position = pos;

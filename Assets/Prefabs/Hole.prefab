@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 411886258892680806}
   - component: {fileID: 411886258892680814}
   - component: {fileID: 411886258892680817}
+  - component: {fileID: 6522081059479010523}
   m_Layer: 6
   m_Name: Dino
   m_TagString: Untagged
@@ -146,10 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff24672a3496c3d44992facc239bf76c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holeTop: {fileID: 0}
-  originMat: {fileID: 2100000, guid: 1429e8a791d695d4dba562cd74c87ee4, type: 2}
-  stencilMat: {fileID: 2100000, guid: 105788d7bf9f78440b7aca938c0fc690, type: 2}
-  escapeHeight: 0.007
 --- !u!114 &411886258892680817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +160,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mass: 5
+--- !u!114 &6522081059479010523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411886258892680912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b13935b1f7fad554aa083a9ac96368f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &411886258892680913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,6 +1203,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999976, y: 1.0918672, z: 0.47632185}
   m_Center: {x: 0, y: -0.009509288, z: -0.19117086}
+--- !u!114 &411886258892680819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2268111924596900652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a33e295da7cefb4bb75f404f2058dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 0
+  destinationY: 0
+  massCheckBounds: {x: 0.06, y: 0.02, z: 0.09}
+  offset: {x: 0, y: 0.006, z: 0}
+  speed: 0.1
 --- !u!1 &5288285086688202331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,23 +1315,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &411886258892680819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2268111924596900652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a33e295da7cefb4bb75f404f2058dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mass: 0
-  destinationY: 0
-  massCheckBounds: {x: 0.06, y: 0.02, z: 0.09}
-  offset: {x: 0, y: 0.006, z: 0}
-  speed: 0.1
 --- !u!1001 &42903708565285692
 PrefabInstance:
   m_ObjectHideFlags: 0

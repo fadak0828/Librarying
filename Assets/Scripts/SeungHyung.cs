@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SeungHyung : MonoBehaviour
 {
-    private void Update() {
+    public GameObject spawnEffectPref;
+    private void Start() {
+        Instantiate(spawnEffectPref, transform).transform.parent = null;
     }
 
     private void OnTriggerEnter(Collider other) {
