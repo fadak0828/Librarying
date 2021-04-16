@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SeungHyung : MonoBehaviour
 {
-    public float speed = 2;
-    void Start()
-    {
-        
+    public GameObject spawnEffectPref;
+    private void Start() {
+        Instantiate(spawnEffectPref, transform).transform.parent = null;
     }
 
-    void Update()
-    {
-        transform.Translate(transform.forward * Time.deltaTime * speed);
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.name.Contains("Basket")) {
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
     }
 }

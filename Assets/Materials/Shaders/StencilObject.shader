@@ -6,16 +6,18 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
+        [Enum(UnityEngine.Rendering.CompareFunction)] _StencilComp ("StencilComp", Int) = 3
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
 		LOD 200
-		Stencil {
-			Ref[_StencilMask]
-			Comp equal
-			Pass keep
-			Fail keep
-		}
+        Stencil
+        {
+            Ref 1
+            //Comp notEqua    //이 경우는, 영역을 벗어나야 렌더링이 됩니다. 
+            Comp [_StencilComp]   //스탠실 영역과 겹치면 나오게 됩니다. 
+            Pass keep
+        }
 		CGPROGRAM
 
 		// Physically based Standard lighting model, and enable shadows on all light types

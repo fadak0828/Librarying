@@ -48,7 +48,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1859126764330856895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -91,7 +91,7 @@ BoxCollider:
   m_GameObject: {fileID: 1859126764330856895}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe54fbec09eefe84a9be691883cef8a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seungHyungPositions: []
   seungHyungPref: {fileID: 7068409135661581751, guid: 548d6d50bb5ba354599292be1afc4508,
     type: 3}
-  createInterval: 2
+  interval: 1
