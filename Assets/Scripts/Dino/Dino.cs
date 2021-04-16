@@ -29,10 +29,4 @@ public class Dino : MonoBehaviour
         animator.enabled = true;
         animator.Play("DinoJumpToGround");
     }
-
-    // private void OnTriggerExit(Collider other) {
-    //     if (other.gameObject.name.Contains("HoleBounds")) {
-    //         OnEscpae();
-    //     }    
-    // }
 }
