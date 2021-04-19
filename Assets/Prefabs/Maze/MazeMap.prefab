@@ -366,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &384386058
 Transform:
   m_ObjectHideFlags: 0
@@ -1694,6 +1694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8319629910316489116}
   - component: {fileID: 1267382997}
+  - component: {fileID: 2559622331291649037}
   m_Layer: 0
   m_Name: MazeMap
   m_TagString: Untagged
@@ -1745,6 +1746,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &2559622331291649037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8319629910316489117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1012cba383b85a648ab0e3a135665424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mazeCardPlaces:
+  - {fileID: 236179451}
+  - {fileID: 718171868}
+  - {fileID: 1387997917}
+  - {fileID: 1344648935}
+  allCorrectPlaced: 0
 --- !u!1001 &6021022375293822352
 PrefabInstance:
   m_ObjectHideFlags: 0
