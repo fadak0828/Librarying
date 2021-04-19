@@ -10,33 +10,39 @@ public class MazeCardPlace : MonoBehaviour
     public Collider m_collider;
     public bool isCorrect;
     public string answerName;
-    private GameObject model;
+    public List<GameObject> models;
     private GameObject innerMazeCard;
     private GameObject temp;
-    
+
     private void Start() {
-        model = transform.GetChild(0).gameObject;
+        models = new List<GameObject>();
+        foreach(Transform child in transform) {
+            if (child != transform) models.Add(child.gameObject);
+        }
     }
 
     private void Update() {
         temp = Physics.OverlapBox(transform.position, m_collider.bounds.size * 0.5f, transform.rotation, LayerMask.GetMask("MazeCardIndicator"))
                             .Select(c => c.gameObject)
-                            .FirstOrDefault(mci => mci.name.Contains(answerName));
+                            .FirstOrDefault(mci => mci != null);
 
         if (temp != null) {
             innerMazeCard = temp;
 
+            
             Vector3? side = GetCardDirection(innerMazeCard.transform.forward);
             if (side != null) {
-                model.transform.forward = (Vector3)side;
+                models.ForEach(m => {
+                    m.SetActive(temp.name.Contains(m.name));
+                    m.transform.forward = (Vector3)side;
+                });
             }
-            isCorrect = side != null;
-            model.SetActive(isCorrect);
+            isCorrect = side == transform.forward && temp.name.Contains(answerName);
         } else {
             if (innerMazeCard != null) {
                 innerMazeCard = null;
             }
-            model.SetActive(false);
+            models.ToList().ForEach(m => m.SetActive(false));
             isCorrect = false;
         }
     }

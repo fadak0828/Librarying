@@ -6,14 +6,14 @@ public class KnockEffect : MonoBehaviour
 {
     AudioSource knockSound;
     Animator doorAnim;
-    public GameObject doorPivot;
+    public GameObject door;
     public GameObject hand;
     public GameObject handPivot;
     Animator handAnim;
     void Start()
     {
         knockSound = GetComponent<AudioSource>();
-        doorAnim = doorPivot.GetComponent<Animator>();
+        doorAnim = door.GetComponent<Animator>();
         handAnim = handPivot.GetComponent<Animator>();
         doorAnim.enabled = false;
         hand.SetActive(false);

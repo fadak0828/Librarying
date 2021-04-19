@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
-using System.Linq;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -302,7 +301,6 @@ namespace PolyPerfect
             //Assign the stats to variables
             originalDominance = stats.dominance;
             dominance = originalDominance;
-            power = stats.power;
 
             toughness = stats.toughness;
             territorial = stats.territorial;
@@ -489,7 +487,6 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(idleStates[currentState].animationBool))
             {
-                if(animator.parameters.Any(x => x.name == idleStates[currentState].animationBool))
                 animator.SetBool(idleStates[currentState].animationBool, true);
             }
 
@@ -510,8 +507,7 @@ namespace PolyPerfect
             {
                 if (!string.IsNullOrEmpty(idleStates[currentState].animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == idleStates[currentState].animationBool))
-                        animator.SetBool(idleStates[currentState].animationBool, false);
+                    animator.SetBool(idleStates[currentState].animationBool, false);
                 }
             }
 
@@ -536,8 +532,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, true);
+                animator.SetBool(movementStates[currentState].animationBool, true);
             }
 
             movementEvent.Invoke();
@@ -571,8 +566,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, false);
+                animator.SetBool(movementStates[currentState].animationBool, false);
             }
 
             DecideNextState(false);
@@ -604,8 +598,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, false);
+                animator.SetBool(movementStates[currentState].animationBool, false);
             }
 
             DecideNextState(false);
@@ -640,8 +633,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, true);
+                animator.SetBool(movementStates[currentState].animationBool, true);
             }
 
             StartCoroutine(RunAwayState(target, predator));
@@ -664,8 +656,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, false);
+                animator.SetBool(movementStates[currentState].animationBool, false);
             }
 
             if (timeMoving > stamina || predator.dead || Vector3.Distance(transform.position, predator.transform.position) > awareness)
@@ -704,8 +695,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, true);
+                animator.SetBool(movementStates[currentState].animationBool, true);
             }
 
             StartCoroutine(NonNavMeshRunAwayState(targetLocation, predator));
@@ -736,8 +726,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, false);
+                animator.SetBool(movementStates[currentState].animationBool, false);
             }
 
             if (stamina <= 0 || predator.dead || Vector3.Distance(transform.position, predator.transform.position) > awareness)
@@ -773,8 +762,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, true);
+                animator.SetBool(movementStates[currentState].animationBool, true);
             }
 
             if (useNavMesh)
@@ -812,8 +800,7 @@ namespace PolyPerfect
 
                     if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
                     {
-                        if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                            animator.SetBool(movementStates[currentState].animationBool, false);
+                        animator.SetBool(movementStates[currentState].animationBool, false);
                     }
 
                     AttackAnimal(prey);
@@ -834,8 +821,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, false);
+                animator.SetBool(movementStates[currentState].animationBool, false);
             }
 
             if (timeMoving > stamina || prey.dead || Vector3.Distance(transform.position, prey.transform.position) > scent || gotAway)
@@ -881,8 +867,7 @@ namespace PolyPerfect
 
                     if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
                     {
-                        if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                            animator.SetBool(movementStates[currentState].animationBool, false);
+                        animator.SetBool(movementStates[currentState].animationBool, false);
                     }
 
                     AttackAnimal(prey);
@@ -903,8 +888,7 @@ namespace PolyPerfect
 
             if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                    animator.SetBool(movementStates[currentState].animationBool, false);
+                animator.SetBool(movementStates[currentState].animationBool, false);
             }
 
             if (stamina <= 0 || prey.dead || Vector3.Distance(transform.position, prey.transform.position) > scent || gotAway)
@@ -941,8 +925,7 @@ namespace PolyPerfect
             {
                 if (!string.IsNullOrEmpty(attackingStates[currentState].animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == attackingStates[currentState].animationBool))
-                        animator.SetBool(attackingStates[currentState].animationBool, true);
+                    animator.SetBool(attackingStates[currentState].animationBool, true);
                 }
             }
 
@@ -969,8 +952,7 @@ namespace PolyPerfect
 
             if (attackingStates.Length > 0 && !string.IsNullOrEmpty(attackingStates[currentState].animationBool))
             {
-                if (animator.parameters.Any(x => x.name == attackingStates[currentState].animationBool))
-                    animator.SetBool(attackingStates[currentState].animationBool, false);
+                animator.SetBool(attackingStates[currentState].animationBool, false);
             }
 
             attackingEvent.Invoke();
@@ -998,8 +980,7 @@ namespace PolyPerfect
             {
                 if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                        animator.SetBool(movementStates[currentState].animationBool, false);
+                    animator.SetBool(movementStates[currentState].animationBool, false);
                 }
 
                 AttackAnimal(attacker);
@@ -1019,8 +1000,7 @@ namespace PolyPerfect
 
                     if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
                     {
-                        if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                            animator.SetBool(movementStates[currentState].animationBool, false);
+                        animator.SetBool(movementStates[currentState].animationBool, false);
                     }
 
                     moving = false;
@@ -1029,8 +1009,7 @@ namespace PolyPerfect
                 {
                     if (idleStates.Length > 0 && !string.IsNullOrEmpty(idleStates[currentState].animationBool))
                     {
-                        if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                            animator.SetBool(idleStates[currentState].animationBool, false);
+                        animator.SetBool(idleStates[currentState].animationBool, false);
                     }
                 }
             }
@@ -1069,8 +1048,7 @@ namespace PolyPerfect
             {
                 if (!string.IsNullOrEmpty(state.animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == state.animationBool))
-                        animator.SetBool(state.animationBool, false);
+                    animator.SetBool(state.animationBool, false);
                 }
             }
 
@@ -1078,8 +1056,7 @@ namespace PolyPerfect
             {
                 if (!string.IsNullOrEmpty(state.animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == state.animationBool))
-                        animator.SetBool(state.animationBool, false);
+                    animator.SetBool(state.animationBool, false);
                 }
             }
 
@@ -1087,8 +1064,7 @@ namespace PolyPerfect
             {
                 if (!string.IsNullOrEmpty(state.animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == state.animationBool))
-                        animator.SetBool(state.animationBool, false);
+                    animator.SetBool(state.animationBool, false);
                 }
             }
 
@@ -1098,8 +1074,7 @@ namespace PolyPerfect
 
                 if (!string.IsNullOrEmpty(deathStates[currentState].animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == deathStates[currentState].animationBool))
-                        animator.SetBool(deathStates[currentState].animationBool, true);
+                    animator.SetBool(deathStates[currentState].animationBool, true);
                 }
             }
 
@@ -1188,8 +1163,7 @@ namespace PolyPerfect
 
                 if (!string.IsNullOrEmpty(movementStates[currentState].animationBool))
                 {
-                    if (animator.parameters.Any(x => x.name == movementStates[currentState].animationBool))
-                        animator.SetBool(movementStates[currentState].animationBool, false);
+                    animator.SetBool(movementStates[currentState].animationBool, false);
                 }
 
                 moving = false;
@@ -1199,8 +1173,7 @@ namespace PolyPerfect
                 if (idleStates.Length - 1 >= currentState)
                     if (idleStates.Length > 0 && !string.IsNullOrEmpty(idleStates[currentState].animationBool))
                     {
-                        if (animator.parameters.Any(x => x.name == idleStates[currentState].animationBool))
-                            animator.SetBool(idleStates[currentState].animationBool, false);
+                        animator.SetBool(idleStates[currentState].animationBool, false);
                     }
             }
 
