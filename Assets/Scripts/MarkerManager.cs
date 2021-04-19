@@ -22,6 +22,9 @@ public class TargetInfo
 
     [HideInInspector]
     public GameObject createdObj;
+
+    [HideInInspector]
+    public bool isSceneObject;
 }
 
 public class MarkerManager : MonoBehaviour
@@ -66,27 +69,38 @@ public class MarkerManager : MonoBehaviour
                 if (trackedImg.trackingState == TrackingState.Tracking) {
                     // 화면에 이미지가 보이는 경우
                     if (target.createdObj == null) {
-                        // 오브젝트가 아직 생성되지 않았으면 새로 생성
-                        target.createdObj = Instantiate(target.targetPref);
+                        if (target.targetPref.gameObject.scene.name == null) {
+                            // 프리팹을 사용하는 경우
+                            // 오브젝트가 아직 생성되지 않았으면 새로 생성
+                            target.createdObj = Instantiate(target.targetPref);
+                        } else {
+                            // 씬 오브젝트를 사용하는 경우
+                            // target 정보에 연결
+                            target.createdObj = target.targetPref;
+                            target.isSceneObject = true;
+                        }
                         target.createdObj.transform.parent = trackedImg.transform;
-                        target.createdObj.SetActive(true);
+
+                        target.createdObj.transform.localPosition = Vector3.zero;
+                        target.createdObj.transform.localRotation = Quaternion.identity;
                     }
+
+                    target.createdObj.SetActive(true);
 
                     if (target.trackingRoation || target.enableTracking) {
                         // 오브젝트 위치, 회전값 초기화
-                        target.createdObj.transform.parent = trackedImg.transform;
                         if (target.enableTracking) {
                             target.createdObj.transform.localPosition = Vector3.zero;
                         }
                         if (target.trackingRoation) {
                             target.createdObj.transform.localRotation = Quaternion.identity;
                         }
-                        target.createdObj.transform.parent = null;
                     }
                 } else {
                     // 화면에서 이미지가 사라진 경우
                     if (target.createdObj != null) {
-                        if (target.dontDestory) {
+                        // dontDestory가 체크되어 있거나, 프리팹이 아닌 씬 오브젝트를 사용한 경우 파괴하지 않고 비활성화
+                        if (target.dontDestory || target.isSceneObject) {
                             target.createdObj.SetActive(false);
                         } else {
                             // 만들어진 오브젝트가 있으면 파괴
