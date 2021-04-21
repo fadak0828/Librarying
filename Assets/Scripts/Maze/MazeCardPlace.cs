@@ -10,15 +10,14 @@ public class MazeCardPlace : MonoBehaviour
     public Collider m_collider;
     public bool isCorrect;
     public string answerName;
-    public List<GameObject> models;
     private GameObject innerMazeCard;
     private GameObject temp;
+    private GameObject innerMazeCardModel;
+
+    private GameObject cardPivot;
 
     private void Start() {
-        models = new List<GameObject>();
-        foreach(Transform child in transform) {
-            if (child != transform) models.Add(child.gameObject);
-        }
+        cardPivot = transform.GetChild(0).gameObject;
     }
 
     private void Update() {
@@ -28,21 +27,26 @@ public class MazeCardPlace : MonoBehaviour
 
         if (temp != null) {
             innerMazeCard = temp;
-
+            innerMazeCardModel = innerMazeCard.transform.GetChild(0).gameObject;
             
             Vector3? side = GetCardDirection(innerMazeCard.transform.forward);
             if (side != null) {
-                models.ForEach(m => {
-                    m.SetActive(temp.name.Contains(m.name));
-                    m.transform.forward = (Vector3)side;
-                });
+                innerMazeCardModel.transform.parent = cardPivot.transform;
+                innerMazeCardModel.transform.localPosition = Vector3.zero;
+                innerMazeCardModel.transform.up = transform.up;
+                innerMazeCardModel.transform.forward = (Vector3)side;
+                innerMazeCardModel.transform.parent = innerMazeCard.transform;
             }
             isCorrect = side == transform.forward && temp.name.Contains(answerName);
         } else {
             if (innerMazeCard != null) {
+                innerMazeCardModel.transform.parent = innerMazeCard.transform;
+                innerMazeCardModel.transform.localPosition = Vector3.zero;
+                innerMazeCardModel.transform.localRotation = Quaternion.identity;
+
                 innerMazeCard = null;
+                innerMazeCardModel = null;
             }
-            models.ToList().ForEach(m => m.SetActive(false));
             isCorrect = false;
         }
     }
