@@ -5,19 +5,26 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 [System.Serializable]
+public struct PageOption {
+    public bool isPageImage;
+    public bool isStatic;
+
+    public PageOption(bool isPageImage, bool isStatic) {
+        this.isPageImage = isPageImage;
+        this.isStatic = isStatic;
+    }
+}
+
+[System.Serializable]
 public class TargetInfo
 {
     [Tooltip("ImageLibrary에 등록된 이미지 이름")]
     public string name;
 
-    [Tooltip("페이지 이미지인가? 다른 페이지가 인식되면 꺼진다")]
-    public bool isPageImage;
+    public PageOption pageOption = new PageOption(false, false);
 
     [Tooltip("이미지를 따라서 위치 변경할 것인지?")]
     public bool enableTracking = true;
-
-    [Tooltip("이미지가 안보이면 파괴할 것인지? 체크시 Destroy 대신 SetActive true/false로 조절")]
-    public bool dontDestory = false;
 
     public GameObject targetPref;
 
@@ -41,7 +48,7 @@ public class MarkerManager : MonoBehaviour
             if (pageObject == value) return;
 
             if (_pageObject != null) {
-                if (_pageObject.dontDestory) {
+                if (_pageObject.isSceneObject) {
                     _pageObject.createdObj.SetActive(false);
                 } else {
                     Destroy(_pageObject.createdObj);
@@ -102,33 +109,26 @@ public class MarkerManager : MonoBehaviour
                         target.createdObj.transform.localPosition = Vector3.zero;
                         target.createdObj.transform.localRotation = Quaternion.identity;
 
-                        if (target.isPageImage) {
+                        if (!target.enableTracking) {
+                            target.createdObj.transform.parent = transform;
+                        }
+
+                        if (target.pageOption.isPageImage) {
                             pageObject = target;
                         }
                     }
 
                     target.createdObj.SetActive(true);
-                    
-                    if (!target.enableTracking) {
-                        target.createdObj.transform.parent = null;
-                    }
 
-                    // if (target.trackingRoation || target.enableTracking) {
-                    //     // 오브젝트 위치, 회전값 초기화
-                    //     if (target.enableTracking) {
-                    //         target.createdObj.transform.localPosition = Vector3.zero;
-                    //     }
-                    //     if (target.trackingRoation) {
-                    //         target.createdObj.transform.localRotation = Quaternion.identity;
-                    //     }
-                    // }
                 } else {
                     // 화면에서 이미지가 사라진 경우 
-                    if (target.isPageImage) continue;
+
+                    // target.isPageImage
+                    if (target.pageOption.isStatic) continue;
 
                     if (target.createdObj != null) {
                         // dontDestory가 체크되어 있거나, 프리팹이 아닌 씬 오브젝트를 사용한 경우 파괴하지 않고 비활성화
-                        if (target.dontDestory || target.isSceneObject) {
+                        if (target.isSceneObject) {
                             target.createdObj.SetActive(false);
                         } else {
                             // 만들어진 오브젝트가 있으면 파괴

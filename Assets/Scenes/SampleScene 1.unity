@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 22732923}
   - component: {fileID: 22732922}
   - component: {fileID: 22732921}
+  - component: {fileID: 22732926}
   m_Layer: 0
   m_Name: AR Camera
   m_TagString: Untagged
@@ -250,6 +251,19 @@ Transform:
   m_Father: {fileID: 388525031}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &22732926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 22732919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520bb47c46cf8624fafb307b7d1b862a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 22732920}
 --- !u!1 &388525029
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,64 +341,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetList:
   - name: BreadFactory
-    isPageImage: 0
+    pageOption:
+      isPageImage: 1
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 0
     targetPref: {fileID: 7699907635423108408, guid: 2d1f315bb8946634c856fe97372fada6,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: SeungHyungFactory
-    isPageImage: 0
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 0
     targetPref: {fileID: 8502108251575152019, guid: ab5f35bd7f4d5da4aa8d15c97a995d87,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: Page1
-    isPageImage: 0
+    pageOption:
+      isPageImage: 1
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 0
     targetPref: {fileID: 2059541510}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: Page2
-    isPageImage: 0
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 1
     targetPref: {fileID: 411886258892680934, guid: f6aa362772d1894449a1fe71ce78493f,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: Page3
-    isPageImage: 0
+    pageOption:
+      isPageImage: 1
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 0
     targetPref: {fileID: 8162473334381622424, guid: 3e5365af15b30c44d982a88d9f3f06cd,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: eggRed
-    isPageImage: 1
-    enableTracking: 0
-    dontDestory: 0
+    pageOption:
+      isPageImage: 1
+      isStatic: 0
+    enableTracking: 1
     targetPref: {fileID: 8319629910316489117, guid: 6ffa4eeffdcdd7647973cf0c0ce0a1d9,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: eggBlue
-    isPageImage: 0
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 0
     targetPref: {fileID: 7167545945880689966, guid: 1ac58dde98583184793b963ae4c55949,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
   - name: Happy
-    isPageImage: 0
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
     enableTracking: 1
-    dontDestory: 0
     targetPref: {fileID: 8216491619324878824, guid: 7b2d2a647a89c2d4094fe9eca67e29cc,
       type: 3}
     createdObj: {fileID: 0}
