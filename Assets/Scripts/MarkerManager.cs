@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using DodleUtils;
 
 [System.Serializable]
 public struct PageOption {
@@ -33,12 +34,19 @@ public class TargetInfo
 
     [HideInInspector]
     public bool isSceneObject;
+
+    [HideInInspector]
+    public Vector3 positionVelocity;
+
+    [HideInInspector]
+    public Vector3 rotationVelocity;
 }
 
 public class MarkerManager : MonoBehaviour
 {
     public static MarkerManager Instance;
     public List<TargetInfo> targetList;
+    public float smoothTime = 0.1f;
     private ARTrackedImageManager manager;
 
     private TargetInfo _pageObject;
@@ -109,9 +117,7 @@ public class MarkerManager : MonoBehaviour
                         target.createdObj.transform.localPosition = Vector3.zero;
                         target.createdObj.transform.localRotation = Quaternion.identity;
 
-                        if (!target.enableTracking) {
-                            target.createdObj.transform.parent = transform;
-                        }
+                        target.createdObj.transform.parent = transform;
 
                         if (target.pageOption.isPageImage) {
                             pageObject = target;
@@ -120,6 +126,10 @@ public class MarkerManager : MonoBehaviour
 
                     target.createdObj.SetActive(true);
 
+                    if (target.enableTracking) {
+                        target.createdObj.transform.position = Vector3.SmoothDamp(target.createdObj.transform.position, trackedImg.transform.position, ref target.positionVelocity, smoothTime);
+                        target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(target.createdObj.transform.rotation, trackedImg.transform.rotation, ref target.rotationVelocity, smoothTime);
+                    }
                 } else {
                     // 화면에서 이미지가 사라진 경우 
 

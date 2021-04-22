@@ -168,7 +168,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 20
   field of view: 60
   orthographic: 0
@@ -349,6 +349,8 @@ MonoBehaviour:
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
   - name: SeungHyungFactory
     pageOption:
       isPageImage: 0
@@ -358,6 +360,8 @@ MonoBehaviour:
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
   - name: Page1
     pageOption:
       isPageImage: 1
@@ -366,6 +370,8 @@ MonoBehaviour:
     targetPref: {fileID: 2059541510}
     createdObj: {fileID: 0}
     isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
   - name: Page2
     pageOption:
       isPageImage: 0
@@ -375,6 +381,8 @@ MonoBehaviour:
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
   - name: Page3
     pageOption:
       isPageImage: 1
@@ -384,24 +392,19 @@ MonoBehaviour:
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
   - name: eggRed
     pageOption:
       isPageImage: 1
-      isStatic: 0
+      isStatic: 1
     enableTracking: 1
     targetPref: {fileID: 8319629910316489117, guid: 6ffa4eeffdcdd7647973cf0c0ce0a1d9,
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
-  - name: eggBlue
-    pageOption:
-      isPageImage: 0
-      isStatic: 0
-    enableTracking: 1
-    targetPref: {fileID: 7167545945880689966, guid: 1ac58dde98583184793b963ae4c55949,
-      type: 3}
-    createdObj: {fileID: 0}
-    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
   - name: Happy
     pageOption:
       isPageImage: 0
@@ -411,6 +414,53 @@ MonoBehaviour:
       type: 3}
     createdObj: {fileID: 0}
     isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+  - name: eggBlue
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
+    enableTracking: 1
+    targetPref: {fileID: 2890314490660699261, guid: 0685fe583e4328f4abdccd03ce219cb1,
+      type: 3}
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+  - name: Glass
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
+    enableTracking: 1
+    targetPref: {fileID: 7167545945880689966, guid: 1ac58dde98583184793b963ae4c55949,
+      type: 3}
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+  - name: eggYellow
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
+    enableTracking: 1
+    targetPref: {fileID: 5426397417171889290, guid: 6db87a7e69a8a5e47bc4295b6332c0c0,
+      type: 3}
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+  - name: eggGreen
+    pageOption:
+      isPageImage: 0
+      isStatic: 0
+    enableTracking: 1
+    targetPref: {fileID: 4269503061151369581, guid: f28cd7455ca464c4e8788afb49964bdd,
+      type: 3}
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+  smoothTime: 0.02
 --- !u!1001 &668772388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1099,6 +1149,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1267382997, guid: 6ffa4eeffdcdd7647973cf0c0ce0a1d9, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8319629910316489116, guid: 6ffa4eeffdcdd7647973cf0c0ce0a1d9,
         type: 3}
       propertyPath: m_RootOrder
