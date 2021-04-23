@@ -5,6 +5,18 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using DodleUtils;
 
+public enum ArAppearAnimationType {
+    NONE,
+    GROW_UP,
+    FADE_IN
+}
+
+public enum ArDisappearAnimationType {
+    NONE,
+    GROW_DOWN,
+    FADE_OUT
+}
+
 [System.Serializable]
 public struct PageOption {
     public bool isPageImage;
@@ -21,6 +33,8 @@ public class TargetInfo
 {
     [Tooltip("ImageLibrary에 등록된 이미지 이름")]
     public string name;
+    public ArAppearAnimationType appearAnimation;
+    public ArDisappearAnimationType disappearAnimation;
 
     public PageOption pageOption = new PageOption(false, false);
 
