@@ -6,6 +6,9 @@ public class WangWangPower : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        if (other.GetComponent<Rigidbody>() != null)
+        {
+            other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        }
     }
 }

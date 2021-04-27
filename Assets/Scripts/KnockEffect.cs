@@ -10,6 +10,7 @@ public class KnockEffect : MonoBehaviour
     public GameObject hand;
     public GameObject handPivot;
     Animator handAnim;
+    public GameObject[] animals;
     void Start()
     {
         knockSound = GetComponent<AudioSource>();
@@ -20,7 +21,7 @@ public class KnockEffect : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<MeshRenderer>().enabled = false;
+        //other.GetComponent<MeshRenderer>().enabled = false;
         knockSound.Play();
         hand.SetActive(true);
         Invoke("DoorOpen", 1.7f);
@@ -29,6 +30,15 @@ public class KnockEffect : MonoBehaviour
     {
         doorAnim.enabled = true;
         handAnim.enabled = false;
+        hand.SetActive(false);
         knockSound.Stop();
+        Invoke("AnimalsOut", 1f);
+    }
+    void AnimalsOut()
+    {
+        for (int i = 0; i < animals.Length; i++)
+        {
+            animals[i].SetActive(true);
+        }
     }
 }

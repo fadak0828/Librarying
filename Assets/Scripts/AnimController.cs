@@ -52,10 +52,15 @@ public class AnimController : MonoBehaviour
             count = 0;
         }
     }
+    bool check;
     void Two()
     {
-        wwAnim.SetTrigger("Walk");
-        shAnim.SetTrigger("Run");
+        if (check == false)
+        {
+            wwAnim.SetTrigger("Walk");
+            shAnim.SetTrigger("Run");
+            check = true;
+        }
         Destroy(wangwang,9.1f);
         Destroy(sh,9.1f);
     }
