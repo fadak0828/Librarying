@@ -7,37 +7,39 @@ using System.Linq;
 // 미로카드 놓는 자리
 public class MazeCardPlace : MonoBehaviour
 {
-    public Collider m_collider;
     public bool isCorrect;
     public string answerName;
+    public Transform[] points;
     private GameObject innerMazeCard;
-    private GameObject temp;
     private GameObject innerMazeCardModel;
 
     private GameObject cardPivot;
+    public GameObject[] cards;
 
-    private void Start() {
-        cardPivot = transform.GetChild(0).gameObject;
+    public GameObject includeCard;
+
+    private void Awake() {
+        cardPivot = gameObject;
+        // cards = GameObject.FindGameObjectsWithTag("MazeCard");
     }
 
     private void Update() {
-        temp = Physics.OverlapBox(transform.position, m_collider.bounds.size * 0.5f, transform.rotation, LayerMask.GetMask("MazeCardIndicator"))
-                            .Select(c => c.gameObject)
-                            .FirstOrDefault(mci => mci != null);
+        includeCard = GetInsideCard();
 
-        if (temp != null) {
-            innerMazeCard = temp;
+        if (includeCard != null) {
+            innerMazeCard = includeCard;
             innerMazeCardModel = innerMazeCard.transform.GetChild(0).gameObject;
             
             Vector3? side = GetCardDirection(innerMazeCard.transform.forward);
             if (side != null) {
                 innerMazeCardModel.transform.parent = cardPivot.transform;
                 innerMazeCardModel.transform.localPosition = Vector3.zero;
-                innerMazeCardModel.transform.up = transform.up;
+                innerMazeCardModel.transform.localRotation = Quaternion.identity;
+                // innerMazeCardModel.transform.up = transform.up;
                 innerMazeCardModel.transform.forward = (Vector3)side;
                 innerMazeCardModel.transform.parent = innerMazeCard.transform;
             }
-            isCorrect = side == transform.forward && temp.name.Contains(answerName);
+            isCorrect = side == transform.forward && includeCard.name.Contains(answerName);
         } else {
             if (innerMazeCard != null) {
                 innerMazeCardModel.transform.parent = innerMazeCard.transform;
@@ -49,6 +51,25 @@ public class MazeCardPlace : MonoBehaviour
             }
             isCorrect = false;
         }
+    }
+
+    private GameObject GetInsideCard() {
+        Vector2[] vertices = new Vector2[points.Length];
+        
+        for(int i = 0; i < points.Length; i++) {
+            vertices[i] = GetScreenPoint(points[i].position);
+        }
+
+        foreach (GameObject card in cards) {
+            if (PolyUtil.IsPointInPolygon(GetScreenPoint(card.transform.position), vertices)) 
+            return card;
+        }
+
+        return null;
+    }
+
+    private Vector3 GetScreenPoint(Vector3 point) {
+        return Camera.main.WorldToScreenPoint(point);
     }
 
     private Vector3? GetCardDirection(Vector3 cardForward) {
@@ -65,22 +86,5 @@ public class MazeCardPlace : MonoBehaviour
         }
 
         return null;
-    }
-
-    public static void DrawCube(Vector3 position, Quaternion rotation, Vector3 scale)
-    {
-        Matrix4x4 cubeTransform = Matrix4x4.TRS(position, rotation, scale);
-        Matrix4x4 oldGizmosMatrix = Gizmos.matrix;
-
-        Gizmos.matrix *= cubeTransform;
-        Gizmos.color = new Color(1, 0, 0, 0.2f);
-
-        Gizmos.DrawCube(Vector3.zero, Vector3.one);
-
-        Gizmos.matrix = oldGizmosMatrix;
-    }
-
-    private void OnDrawGizmos() {
-        DrawCube(transform.position, transform.rotation, m_collider.bounds.size);
     }
 }

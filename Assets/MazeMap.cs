@@ -5,6 +5,7 @@ using System.Linq;
 
 public class MazeMap : MonoBehaviour
 {
+    public WangWangBusAnim wangwangBusAnim;
     public MazeCardPlace[] mazeCardPlaces;
     public bool allCorrectPlaced = false;
 
@@ -20,6 +21,6 @@ public class MazeMap : MonoBehaviour
     }
 
     private void OnMazeClear() {
-
+        wangwangBusAnim.PlayAnim();
     }
 }

@@ -11,20 +11,19 @@ public enum ArAnimationType {
 
 public class ArAnimation : MonoBehaviour
 {
-
     private Tween currentTween;
 
-    public void StartAnim(ArAnimationType animationType, TweenCallback callback = null, float duration = 0.7f) {
+    public void StartAnim(ArAnimationType animationType, TweenCallback callback = null, float duration = 3f) {
         switch(animationType) {
             case ArAnimationType.GROW_UP:
-                currentTween = transform.DOScale(Vector3.zero, duration)
+                currentTween = transform.DOScaleY(0, duration)
                     .From()
                     .SetEase(Ease.OutBack)
                     .OnComplete(callback);
                 break;
 
             case ArAnimationType.GROW_DOWN:
-                currentTween = transform.DOScale(Vector3.zero, duration)
+                currentTween = transform.DOScaleY(0, duration)
                     .SetEase(Ease.OutBack);
 
                 currentTween.OnComplete(() => {

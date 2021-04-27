@@ -66,10 +66,6 @@ public class TargetInfo
 
 public class MarkerManager : MonoBehaviour
 {
-    public List<TrackedTarget> addedImages;
-    public List<TrackedTarget> updatedImages;
-    public List<TrackedTarget> removedImages;
-
     public static MarkerManager Instance;
     public List<TargetInfo> targetList;
     public float smoothTime = 0.1f;
@@ -95,8 +91,6 @@ public class MarkerManager : MonoBehaviour
 
     private void OnTrackedImagesChaged(ARTrackedImagesChangedEventArgs args)
     {
-        updatedImages = args.updated.Select(img => new TrackedTarget(img.referenceImage.name, img.trackingState)).ToList();
-
         foreach (ARTrackedImage trackedImg in args.updated)
         {
             foreach (TargetInfo target in targetList)
@@ -111,7 +105,7 @@ public class MarkerManager : MonoBehaviour
                     // 화면에 이미지가 보이는 경우
                     if (target.createdObj == null)
                     {
-                        if (target.targetPref.gameObject.scene.name == null)
+                        if (target.targetPref?.gameObject?.scene.name == null)
                         {
                             // 프리팹을 사용하는 경우
                             // 오브젝트가 아직 생성되지 않았으면 새로 생성

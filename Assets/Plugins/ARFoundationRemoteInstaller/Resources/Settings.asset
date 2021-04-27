@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd607c3f010ab45a29ecfcf8d5a898ef, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  ARCompanionAppIP: 192.168.1.224
+  ARCompanionAppIP: 192.168.1.187
   editorGameViewSettings:
     resolutionScale: 0.33333334
     maxEditorViewFps: 10
@@ -40,14 +40,14 @@ MonoBehaviour:
     version: 4.1.7
     id: com.unity.xr.arfoundation
   - displayName: ARCore XR Plugin
-    version: 4.0.12
+    version: 4.1.7
     id: com.unity.xr.arcore
   - displayName: ARKit XR Plugin
     version: 4.0.12
     id: com.unity.xr.arkit
   port: 44819
   embeddedImageLibraries:
-  - {fileID: 11400000, guid: ee1e93893241986498a87edb890b290f, type: 2}
+  - {fileID: 11400000, guid: 08140ffe289be74439a77e7e17e68ebf, type: 2}
   debugSettings:
     logStartupErrors: 1
     showTelepathyLogs: 0
