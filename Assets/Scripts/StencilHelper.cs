@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Constants;
 
+public enum StencilCompMode {
+    DISABLED,
+    NEVER,
+    LESS,
+    EQUAL,
+    LESS_EQUAL,
+    GREATER,
+    NOT_EQUAL,
+    GREATER_EQUAL,
+    ALWAYS
+}
+
 public class StencilHelper : MonoBehaviour
 {
     private Renderer _renderer;

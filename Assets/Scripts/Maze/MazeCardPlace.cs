@@ -18,12 +18,16 @@ public class MazeCardPlace : MonoBehaviour
 
     public GameObject includeCard;
 
+    public GameObject effectPref;
+
     private void Awake() {
         cardPivot = gameObject;
         // cards = GameObject.FindGameObjectsWithTag("MazeCard");
     }
 
     private void Update() {
+        if (isCorrect) return;
+
         includeCard = GetInsideCard();
 
         if (includeCard != null) {
@@ -37,9 +41,15 @@ public class MazeCardPlace : MonoBehaviour
                 innerMazeCardModel.transform.localRotation = Quaternion.identity;
                 // innerMazeCardModel.transform.up = transform.up;
                 innerMazeCardModel.transform.forward = (Vector3)side;
-                innerMazeCardModel.transform.parent = innerMazeCard.transform;
             }
             isCorrect = side == transform.forward && includeCard.name.Contains(answerName);
+
+            if (!isCorrect) {
+                innerMazeCardModel.transform.parent = innerMazeCard.transform;
+            } else {
+                GameObject effect = Instantiate(effectPref, transform);
+                effect.transform.localScale = Vector3.one * 15;
+            }
         } else {
             if (innerMazeCard != null) {
                 innerMazeCardModel.transform.parent = innerMazeCard.transform;

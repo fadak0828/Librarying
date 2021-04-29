@@ -6,6 +6,8 @@ Shader "StandardStencil/Obj"
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
+        [Space(20)]
+		[IntRange] _StencilMask("Stencil Mask", Range(0, 255)) = 1
         [Enum(UnityEngine.Rendering.CompareFunction)] _StencilComp ("StencilComp", Int) = 3
     }
     SubShader
@@ -14,7 +16,7 @@ Shader "StandardStencil/Obj"
         LOD 200
         Stencil
         {
-            Ref 1
+            Ref [_StencilMask]
             //Comp notEqua    //이 경우는, 영역을 벗어나야 렌더링이 됩니다. 
             Comp [_StencilComp]   //스탠실 영역과 겹치면 나오게 됩니다. 
             Pass keep
