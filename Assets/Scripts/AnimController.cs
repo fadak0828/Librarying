@@ -23,8 +23,10 @@ public class AnimController : MonoBehaviour
     }
     void Start()
     {
-        wwAnim = wangwang.GetComponent<Animator>();
-        shAnim = sh.GetComponent<Animator>();
+        if (wangwang != null && wangwang.GetComponent<Animator>() != null)
+            wwAnim = wangwang.GetComponent<Animator>();
+        if (sh != null && sh.GetComponent<Animator>() != null)
+            shAnim = sh.GetComponent<Animator>();
     }
     void Update()
     {
@@ -36,8 +38,12 @@ public class AnimController : MonoBehaviour
                 Two(); break;
             case Page.AR3:
                 Three(); break;
+            case Page.AR4:
+                Four(); break;
+            case Page.AR6:
+                Six(); break;
             case Page.AR7:
-                StartCoroutine(Seven());break;
+                StartCoroutine(Seven()); break;
         }
     }
 
@@ -61,12 +67,21 @@ public class AnimController : MonoBehaviour
             shAnim.SetTrigger("Run");
             check = true;
         }
-        Destroy(wangwang,9.1f);
-        Destroy(sh,9.1f);
+        Destroy(wangwang, 9.1f);
+        Destroy(sh, 9.1f);
     }
     void Three()
     {
 
+    }
+    void Four()
+    {
+        wwAnim.SetTrigger("?");
+        shAnim.SetTrigger("Point");      
+    }
+    void Six()
+    {
+        wwAnim.SetTrigger("LookR");
     }
     IEnumerator Seven()
     {
@@ -75,6 +90,6 @@ public class AnimController : MonoBehaviour
         wwAnim.SetTrigger("Power2");
         yield return new WaitForSeconds(2f);
         transform.GetChild(1).gameObject.SetActive(false);
-        transform.GetChild(2).gameObject.SetActive(true);        
+        transform.GetChild(2).gameObject.SetActive(true);
     }
 }
