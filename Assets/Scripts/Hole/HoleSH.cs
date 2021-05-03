@@ -5,7 +5,8 @@ using UnityEngine;
 public enum HoleShState {
     NONE,
     RUN,
-    WORRY
+    CROUCH,
+    JUMP
 }
 public class HoleSH : MonoBehaviour
 {
@@ -30,8 +31,10 @@ public class HoleSH : MonoBehaviour
         switch(state) {
             case HoleShState.RUN:
                 return "Run";
-            case HoleShState.WORRY:
-                return "Worry";
+            case HoleShState.JUMP:
+                return "Jump";
+            case HoleShState.CROUCH:
+                return "Crouch";
             default:
                 return "Idle";
         }

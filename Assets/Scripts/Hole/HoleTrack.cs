@@ -11,7 +11,7 @@ public class HoleTrack : MonoBehaviour
     public void PlayAnim() {
         PlayableDirector director = GetComponent<PlayableDirector>();
         director.RebuildGraph(); // the graph must be created before getting the playable graph
-        director.playableGraph.GetRootPlayable(0).SetSpeed(0.2f);
+        director.playableGraph.GetRootPlayable(0).SetSpeed(speed);
         director.Play();
     }
 }

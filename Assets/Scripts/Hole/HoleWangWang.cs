@@ -8,11 +8,16 @@ public enum HoleWangWangState {
     IDLE,
     WALK,
     CRYING,
-    SHAKE_HEAD
+    SHAKE_HEAD,
+    JUMP,
+    POWER
 }
 
 public class HoleWangWang : MonoBehaviour
 {
+    public Transform leftFoot;
+    public Transform rightFoot;
+    public GameObject dustPref;
     [SerializeField]
     public HoleWangWangState state = HoleWangWangState.NONE;
     private HoleWangWangState prevState = HoleWangWangState.NONE;
@@ -40,8 +45,17 @@ public class HoleWangWang : MonoBehaviour
                 return "Walk";
             case HoleWangWangState.SHAKE_HEAD:
                 return "ShakeHead";
+            case HoleWangWangState.JUMP:
+                return "Jump";
+            case HoleWangWangState.POWER:
+                return "Power";
             default:
                 return "Idle";
         }
+    }
+
+    public void CreateDust() {
+        GameObject dust = Instantiate(dustPref, transform);
+        dust.transform.parent = null;
     }
 }
