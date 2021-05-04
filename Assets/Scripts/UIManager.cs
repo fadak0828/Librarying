@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         int count=0;
-        if (GameObject.FindGameObjectsWithTag("")==null)        //ÆäÀÌÁö°¡ ¿­¸®¸é ³ª¿À´Â ÄÜÅÙÃ÷
+        if (GameObject.FindGameObjectsWithTag("")==null)        //í˜ì´ì§€ê°€ ì—´ë¦¬ë©´ ë‚˜ì˜¤ëŠ” ì½˜í…ì¸ 
         {
             count++;
         }
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         }
 
         int countB=0;
-        if (GameObject.FindGameObjectsWithTag("")==null)        //QRÄÚµå°¡ ÀÎ½ÄµÆÀ» ¶§ ³ª¿À´Â ÄÜÅÙÃ÷
+        if (GameObject.FindGameObjectsWithTag("")==null)        //QRì½”ë“œê°€ ì¸ì‹ëì„ ë•Œ ë‚˜ì˜¤ëŠ” ì½˜í…ì¸ 
         {
             countB++;
         }
