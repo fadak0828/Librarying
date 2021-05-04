@@ -18,10 +18,13 @@ public class HoleWangWang : MonoBehaviour
     public Transform leftFoot;
     public Transform rightFoot;
     public GameObject dustPref;
+    public BridgeAnim[] bridges;
+
     [SerializeField]
     public HoleWangWangState state = HoleWangWangState.NONE;
     private HoleWangWangState prevState = HoleWangWangState.NONE;
     private Animator animator;
+    public bool shakeBridge;
 
     private void Start() {
         animator = GetComponent<Animator>();
@@ -54,8 +57,35 @@ public class HoleWangWang : MonoBehaviour
         }
     }
 
-    public void CreateDust() {
-        GameObject dust = Instantiate(dustPref, transform);
-        dust.transform.parent = null;
+    private void CreateDust(Transform landedFootTransform) {
+        if (shakeBridge) {
+            foreach(var bridge in bridges) {
+                print("bridge");
+                bridge.PlayBounceAnim();
+            }
+        }
+        Instantiate(dustPref, landedFootTransform.position, landedFootTransform.rotation);
+    }
+
+    public void OnLandLeftFoot() {
+        CreateDust(leftFoot);
+    }
+
+    public void OnLandRightFoot() {
+        CreateDust(rightFoot);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        print(other.name);
+        print(other.gameObject.name);
+        if (other.gameObject.name.Contains("BridgeShakeZone")) {
+            shakeBridge = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.name.Contains("BridgeShakeZone")) {
+            shakeBridge = false;
+        }
     }
 }
