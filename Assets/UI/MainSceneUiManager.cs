@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainSceneUiManager : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class MainSceneUiManager : MonoBehaviour
     private Coroutine hideTimer;
     private bool isShowing = false;
 
-    private void Awake() {
+    private void Start() {
+        SetImagesAlpha(uiObjects, 0);
     }
 
     public void OnClickScreen() {
@@ -24,6 +26,18 @@ public class MainSceneUiManager : MonoBehaviour
             StopCoroutine(hideTimer);
         }
         hideTimer = StartCoroutine(IeStartHideTimer(uiShowingDuration));
+    }
+
+    public void GoToStartScene() {
+        SceneManager.LoadScene(0);
+    }
+
+    public void GoToArScene() {
+        SceneManager.LoadScene(1);
+    }
+
+    public void QuitApplication() {
+        Application.Quit();
     }
 
     private IEnumerator IeStartHideTimer(float delay) {
@@ -42,13 +56,15 @@ public class MainSceneUiManager : MonoBehaviour
 
             alphaValue = Mathf.Lerp(from, to, time / animDuration);
 
-            foreach(var image in uiObjects) {
-                SetImageAlpha(image, alphaValue);
-            }
+            SetImagesAlpha(uiObjects, alphaValue);
         }
 
-        foreach(var image in uiObjects) {
-            SetImageAlpha(image, to);
+        SetImagesAlpha(uiObjects, to);
+    }
+
+    private void SetImagesAlpha(Image[] images, float alpha) {
+        foreach(var image in images) {
+            SetImageAlpha(image, alpha);
         }
     }
 
