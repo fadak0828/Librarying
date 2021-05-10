@@ -5,16 +5,16 @@ using DG.Tweening;
 
 public class BridgeAnim : MonoBehaviour
 {
-    private Animator animator;
-
-    private void Start() {
-        animator = GetComponent<Animator>();
-    }
-
     [ContextMenu("PlayBounceAnim")]
     public void PlayBounceAnim() {
-        // transform.DOJump(transform.position, 2, 1, 0.5f);
-        animator.Play("BridgeBounce");
-        print("play bounce anim");
+        transform.DOPunchPosition(Vector3.down, 0.4f);
+    }
+
+    public void FallDown(string direction) {
+        if (direction == "left") {
+            transform.DORotate(new Vector3(15, 90, 180), 0.5f);
+        } else {
+            transform.DORotate(new Vector3(15, -90, 0), 0.5f);
+        }
     }
 }

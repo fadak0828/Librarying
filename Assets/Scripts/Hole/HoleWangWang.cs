@@ -64,7 +64,7 @@ public class HoleWangWang : MonoBehaviour
                 bridge.PlayBounceAnim();
             }
         }
-        Instantiate(dustPref, landedFootTransform.position, landedFootTransform.rotation);
+        Instantiate(dustPref, landedFootTransform.position, landedFootTransform.rotation).transform.localScale *= transform.lossyScale.magnitude * 0.1f;
     }
 
     public void OnLandLeftFoot() {
