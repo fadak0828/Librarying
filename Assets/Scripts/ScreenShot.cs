@@ -9,6 +9,8 @@ using UnityEngine.UI;
 //https://answers.unity.com/questions/200173/android-how-to-refresh-the-gallery-.html
 public class ScreenShot : MonoBehaviour
 {
+    public GameObject screenshotBlinker;
+    public Animator btnGalleryAnim;
     string _name = "";
     public void CaptureScreenshot()
     {
@@ -22,6 +24,7 @@ public class ScreenShot : MonoBehaviour
     //Screen capture and save
     IEnumerator CutImage(string name)
     {
+        Blink();
         //size of picture     
         Texture2D tex = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, true);
         yield return new WaitForEndOfFrame();
@@ -55,5 +58,17 @@ public class ScreenShot : MonoBehaviour
     {
         return DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString()
             + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+    }
+
+    [ContextMenu("Blink")]
+    private void Blink() {
+        screenshotBlinker.GetComponent<Animator>().Play("ScreenshotBlink");
+        StartCoroutine(IeShowBtnGallery());
+    }
+
+    private IEnumerator IeShowBtnGallery() {
+        btnGalleryAnim.Play("BounceIn");
+        yield return new WaitForSeconds(3);
+        btnGalleryAnim.Play("BounceOut");
     }
 }
