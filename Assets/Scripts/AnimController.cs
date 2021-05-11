@@ -35,7 +35,7 @@ public class AnimController : MonoBehaviour
             case Page.AR1:
                 One(); break;
             case Page.AR2:
-                Two(); break;
+                StartCoroutine(Two()); break;
             case Page.AR3:
                 Three(); break;
             case Page.AR4:
@@ -43,7 +43,7 @@ public class AnimController : MonoBehaviour
             case Page.AR6:
                 Six(); break;
             case Page.AR7:
-                StartCoroutine(Seven()); break;
+                StartCoroutine( Seven()); break;
         }
     }
 
@@ -59,7 +59,7 @@ public class AnimController : MonoBehaviour
         }
     }
     bool check;
-    void Two()
+    IEnumerator Two()
     {
         if (check == false)
         {
@@ -67,8 +67,9 @@ public class AnimController : MonoBehaviour
             shAnim.SetTrigger("Run");
             check = true;
         }
-        Destroy(wangwang, 9.1f);
-        Destroy(sh, 9.1f);
+        yield return new WaitForSeconds(2.53f);
+        //wangwang.transform.position += transform.TransformPoint(Vector3.back) * Time.deltaTime;
+        wangwang.transform.Translate(Vector3.forward * Time.deltaTime*0.4f);
     }
     void Three()
     {
@@ -76,20 +77,19 @@ public class AnimController : MonoBehaviour
     }
     void Four()
     {
-        wwAnim.SetTrigger("?");
-        shAnim.SetTrigger("Point");      
+        wwAnim.SetTrigger("Questioning");
+        shAnim.SetTrigger("Point");
     }
     void Six()
     {
-        wwAnim.SetTrigger("LookR");
+        wwAnim.SetTrigger("LookInto");
     }
     IEnumerator Seven()
     {
         wwAnim.SetTrigger("Power");
-        yield return new WaitForSeconds(6f);
-        wwAnim.SetTrigger("Power2");
-        yield return new WaitForSeconds(2f);
-        transform.GetChild(1).gameObject.SetActive(false);
-        transform.GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.1f);
+        sh.transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(6.5f);
+        sh.transform.GetChild(1).gameObject.SetActive(true);
     }
 }
