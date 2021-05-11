@@ -28,7 +28,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.1166667
-        value: {x: -35.359, y: -12.426, z: -47.949}
+        value: {x: -29.243, y: -6.276, z: -51.243}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -37,9 +37,9 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1.6
-        value: {x: -35.359, y: -12.426, z: -47.949}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
+        value: {x: -24.006, y: -1.413, z: -52.49}
+        inSlope: {x: 0, y: 6.624904, z: 0}
+        outSlope: {x: 0, y: 6.624904, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -47,8 +47,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: {x: -32.537, y: 0.05, z: -32.387}
-        inSlope: {x: 16.326488, y: 33.048645, z: 0}
-        outSlope: {x: 16.326488, y: 33.048645, z: 0}
+        inSlope: {x: 0, y: 9.489729, z: 0}
+        outSlope: {x: 0, y: 9.489729, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -1701,7 +1701,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1166667
-        value: -35.359
+        value: -29.243
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1710,7 +1710,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.6
-        value: -35.359
+        value: -24.006
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1720,8 +1720,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: -32.537
-        inSlope: 16.326488
-        outSlope: 16.326488
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -1756,7 +1756,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1166667
-        value: -12.426
+        value: -6.276
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1765,9 +1765,9 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.6
-        value: -12.426
-        inSlope: 0
-        outSlope: 0
+        value: -1.413
+        inSlope: 6.624904
+        outSlope: 6.624904
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -1775,8 +1775,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 2
         value: 0.05
-        inSlope: 33.048645
-        outSlope: 33.048645
+        inSlope: 9.489729
+        outSlope: 9.489729
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -1811,7 +1811,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.1166667
-        value: -47.949
+        value: -51.243
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1820,7 +1820,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1.6
-        value: -47.949
+        value: -52.49
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -6585,7 +6585,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Group/Geometry/Main/DeformationSystem/Root_M/Rump_R
+    path: Group/Geometry/Main/DeformationSystem/Root_M/Tail0_M/Tail1_M/Tail2_M/Tail3_M/Tail4_M/Tail5_M/Tail6_M
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6595,7 +6595,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Group/Geometry/Main/DeformationSystem/Root_M/Rump_R
+    path: Group/Geometry/Main/DeformationSystem/Root_M/Tail0_M/Tail1_M/Tail2_M/Tail3_M/Tail4_M/Tail5_M/Tail6_M
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6605,7 +6605,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Group/Geometry/Main/DeformationSystem/Root_M/Rump_R
+    path: Group/Geometry/Main/DeformationSystem/Root_M/Tail0_M/Tail1_M/Tail2_M/Tail3_M/Tail4_M/Tail5_M/Tail6_M
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6885,7 +6885,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Group/Geometry/Main/DeformationSystem/Root_M/Tail0_M/Tail1_M/Tail2_M/Tail3_M/Tail4_M/Tail5_M/Tail6_M
+    path: Group/Geometry/Main/DeformationSystem/Root_M/Rump_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6895,7 +6895,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Group/Geometry/Main/DeformationSystem/Root_M/Tail0_M/Tail1_M/Tail2_M/Tail3_M/Tail4_M/Tail5_M/Tail6_M
+    path: Group/Geometry/Main/DeformationSystem/Root_M/Rump_R
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -6905,7 +6905,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Group/Geometry/Main/DeformationSystem/Root_M/Tail0_M/Tail1_M/Tail2_M/Tail3_M/Tail4_M/Tail5_M/Tail6_M
+    path: Group/Geometry/Main/DeformationSystem/Root_M/Rump_R
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
