@@ -68,7 +68,6 @@ public class AnimController : MonoBehaviour
             check = true;
         }
         yield return new WaitForSeconds(2.53f);
-        //wangwang.transform.position += transform.TransformPoint(Vector3.back) * Time.deltaTime;
         wangwang.transform.Translate(Vector3.forward * Time.deltaTime*0.4f);
     }
     void Three()
