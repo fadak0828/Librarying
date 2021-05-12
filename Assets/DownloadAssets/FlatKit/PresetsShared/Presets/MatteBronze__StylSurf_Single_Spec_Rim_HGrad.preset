@@ -315,7 +315,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.size
-    value: 59
+    value: 61
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[0].first
@@ -743,50 +743,66 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[53].first
-    value: _TextureImpact
+    value: _TextureBlendingMode
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[53].second
-    value: 1
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SavedProperties.m_Floats.Array.data[54].first
-    value: _UVSec
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SavedProperties.m_Floats.Array.data[54].second
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[54].first
+    value: _TextureImpact
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[54].second
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[55].first
-    value: _UnityShadowMode
+    value: _UVSec
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[55].second
-    value: 1
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[56].first
-    value: _UnityShadowPower
+    value: _UnityShadowMode
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[56].second
-    value: 0.2
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SavedProperties.m_Floats.Array.data[57].first
-    value: _UnityShadowSharpness
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: m_SavedProperties.m_Floats.Array.data[57].second
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[57].first
+    value: _UnityShadowPower
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[57].second
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[58].first
-    value: _ZWrite
+    value: _UnityShadowSharpness
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_SavedProperties.m_Floats.Array.data[58].second
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[59].first
+    value: _VertexColorsEnabled
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[59].second
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[60].first
+    value: _ZWrite
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_SavedProperties.m_Floats.Array.data[60].second
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -1073,3 +1089,8 @@ Preset:
     propertyPath: m_SavedProperties.m_Colors.Array.data[13].second.a
     value: 1
     objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_BuildTextureStacks.Array.size
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

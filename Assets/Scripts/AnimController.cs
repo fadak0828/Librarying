@@ -43,7 +43,9 @@ public class AnimController : MonoBehaviour
             case Page.AR6:
                 Six(); break;
             case Page.AR7:
-                StartCoroutine( Seven()); break;
+               // StartCoroutine( Seven()); break;
+            case Page.AR8:
+                StartCoroutine(Eight()); break;
         }
     }
 
@@ -72,7 +74,8 @@ public class AnimController : MonoBehaviour
     }
     void Three()
     {
-
+        wwAnim.SetTrigger("Walk");
+        shAnim.SetTrigger("Walk");
     }
     void Four()
     {
@@ -83,7 +86,7 @@ public class AnimController : MonoBehaviour
     {
         wwAnim.SetTrigger("LookInto");
     }
-    IEnumerator Seven()
+    IEnumerator Eight()
     {
         wwAnim.SetTrigger("Power");
         yield return new WaitForSeconds(2.1f);
