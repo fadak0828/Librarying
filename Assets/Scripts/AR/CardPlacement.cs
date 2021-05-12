@@ -9,9 +9,11 @@ public class CardPlacement : MonoBehaviour
 {
     public string targetTag;
     public bool isCorrect;
+    public bool isLoop;
 
     public float thresholdTime = 2f;
 
+    public Vector3 placedCardDirection = Vector3.zero;
     private Transform[] points;
 
     private float currentTime = 0;
@@ -28,7 +30,7 @@ public class CardPlacement : MonoBehaviour
     }
 
     private void CheckIsCorrect() {
-        if (!isCorrect) {
+        if (isLoop || !isCorrect) {
             GameObject currentInnerObj = GetInsideCard();
 
             if (currentInnerObj && currentInnerObj == prevInnerObj) {
@@ -47,6 +49,7 @@ public class CardPlacement : MonoBehaviour
     }
 
     protected virtual void OnCardPlacement() {
+        currentTime = 0;
         print("OnCardPlacement");
     }
 
@@ -58,9 +61,13 @@ public class CardPlacement : MonoBehaviour
         }
 
         foreach (GameObject target in targetList) {
-            if (PolyUtil.IsPointInPolygon(GetScreenPoint(target.transform.position), vertices)) 
-            return target;
+            if (PolyUtil.IsPointInPolygon(GetScreenPoint(target.transform.position), vertices)) {
+                placedCardDirection = GetCardDirection(target.transform.forward);
+                return target;
+            }
         }
+
+        placedCardDirection = Vector3.zero;
 
         return null;
     }
@@ -69,8 +76,8 @@ public class CardPlacement : MonoBehaviour
         return Camera.main.WorldToScreenPoint(point);
     }
 
-    private Vector3? GetCardDirection(Vector3 cardForward) {
-        float detectZone = 30;
+    protected Vector3 GetCardDirection(Vector3 cardForward) {
+        float detectZone = 45;
 
         if (Vector3.Angle(cardForward, transform.forward) <= detectZone) {
             return transform.forward;
@@ -78,10 +85,8 @@ public class CardPlacement : MonoBehaviour
             return transform.right;
         } else if (Vector3.Angle(cardForward, -transform.forward) <= detectZone) {
             return -transform.forward;
-        } else if (Vector3.Angle(cardForward, -transform.right) <= detectZone) {
+        } else {
             return -transform.right;
         }
-
-        return null;
     }
 }

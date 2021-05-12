@@ -27,19 +27,19 @@ public class Maze_AR3 : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        float x = transform.eulerAngles.x;
-        float y = transform.eulerAngles.y;
-        float z = transform.eulerAngles.z;
-        if (other.gameObject.name == "RightCard") y += 90; move = true; transform.eulerAngles = new Vector3(x, y, z);       //¿À¸¥ÂÊ Ä«µå°¡ ½ÇÇàÇÒ °Í!!
-        if (other.gameObject.name == "LeftCard") y -= 90; move = true; transform.eulerAngles = new Vector3(x, y, z);         //¿ÞÂÊ Ä«µå°¡ ½ÇÇàÇÒ °Í!!
-        
-        if (other.name == "FinishLine")       //¹Ì·Î Å»Ãâ ¿¡´Ï¸ÞÀÌ¼Ç     //ÆÄÆ¼Å¬ Ãß°¡ÇÏ±â
+        if (other.name == "FinishLine")       //ï¿½Ì·ï¿½ Å»ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ì¼ï¿½     //ï¿½ï¿½Æ¼Å¬ ï¿½ß°ï¿½ï¿½Ï±ï¿½
         {
             ww.GetComponent<Animator>().Play("T-Rex_Roar 1");
             sh.GetComponent<Animator>().Play("SHFinished");
             move = false;
         }
     }
+
+    public void RotateTo(Vector3 direction) {
+        transform.forward = direction;
+        Move();
+    }
+
     void Move()
     {
         move = true;
