@@ -29,6 +29,10 @@ public class MainSceneUiManager : MonoBehaviour
     }
 
     public void GoToStartScene() {
+        Invoke("LoadStartScene", 2);
+    }
+
+    private void LoadStartScene() {
         SceneManager.LoadScene(0);
     }
 

@@ -12,6 +12,22 @@ public class ScreenShot : MonoBehaviour
     public GameObject screenshotBlinker;
     public Animator btnGalleryAnim;
     string _name = "";
+
+    public void OpenGallery()
+    {
+#if UNITY_ANDROID
+
+        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject unityActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaClass intentStaticClass = new AndroidJavaClass("android.content.Intent");
+        string actionView = intentStaticClass.GetStatic<string>("ACTION_VIEW");
+        AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
+        AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "content://media/external/images/media");
+        AndroidJavaObject intent = new AndroidJavaObject("android.content.Intent", actionView, uriObject);
+        unityActivity.Call("startActivity", intent);
+#endif
+    }
+
     public void CaptureScreenshot()
     {
         _name = "";
@@ -61,12 +77,14 @@ public class ScreenShot : MonoBehaviour
     }
 
     [ContextMenu("Blink")]
-    private void Blink() {
+    private void Blink()
+    {
         screenshotBlinker.GetComponent<Animator>().Play("ScreenshotBlink");
         StartCoroutine(IeShowBtnGallery());
     }
 
-    private IEnumerator IeShowBtnGallery() {
+    private IEnumerator IeShowBtnGallery()
+    {
         btnGalleryAnim.Play("BounceIn");
         yield return new WaitForSeconds(3);
         btnGalleryAnim.Play("BounceOut");

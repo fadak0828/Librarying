@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Popup_Settings : MonoBehaviour
 {
+    public Slider musicVolumeSlider;
+    public Slider narrationVolumeSlider;
     private Animator animator;
 
     private void Awake() {
@@ -12,6 +15,9 @@ public class Popup_Settings : MonoBehaviour
 
     private void OnEnable() {
         animator.Play("open");
+
+        musicVolumeSlider.value = SettingManager.Instance.currentSetting.musicVolume;
+        narrationVolumeSlider.value = SettingManager.Instance.currentSetting.narrationVolume;
     }
 
     public void OnClickClose() {

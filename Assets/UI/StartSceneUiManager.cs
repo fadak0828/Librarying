@@ -14,8 +14,6 @@ public class StartSceneUiManager : MonoBehaviour
     }
 
     public void OnClickSetting() {
-        print("test22");
-
         popupSettings.gameObject.SetActive(true);
     }
 
@@ -24,6 +22,10 @@ public class StartSceneUiManager : MonoBehaviour
     }
 
     public void GoToArScene() {
+        Invoke("LoadArScene", 2);
+    }
+
+    private void LoadArScene() {
         SceneManager.LoadScene(1);
     }
 
