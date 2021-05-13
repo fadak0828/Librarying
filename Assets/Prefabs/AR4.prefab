@@ -1111,7 +1111,7 @@ GameObject:
   - component: {fileID: 6372029029007367958}
   - component: {fileID: 6372029029007367945}
   m_Layer: 0
-  m_Name: AR4 (1)
+  m_Name: AR4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,6 +1353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6372029029186799331}
+  - component: {fileID: 3920246915993120109}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -1410,6 +1411,29 @@ Transform:
   m_Father: {fileID: 6372029029415235993}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3920246915993120109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6372029029186799330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e8157a65dcefe469b5ea6a5f60cb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingSpeedX: 0
+  swingSpeedRandomnessX: 0
+  swingSpeedY: 0
+  swingSpeedRandomnessY: 0
+  swingMaxAngleX: 0
+  swingMaxAngleRandomnessX: 0
+  swingMaxAngleY: 0
+  swingMaxAngleRandomnessY: 0
+  direction: 0
+  directionRandomness: 0
+  enableYAxisSwinging: 0
 --- !u!1 &6372029029415235992
 GameObject:
   m_ObjectHideFlags: 0

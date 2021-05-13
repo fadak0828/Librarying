@@ -6,12 +6,14 @@ public class Maze_AR3 : MonoBehaviour
 {
     public GameObject ww;
     public GameObject sh;
+    public GameObject startLine;
     bool move;
     Rigidbody rig;
     private void Start()
     {
         Invoke("Move", 2.1f);
         rig = GetComponent<Rigidbody>();
+        Invoke("StartLine", 3);
     }
     void Update()
     {
@@ -35,7 +37,8 @@ public class Maze_AR3 : MonoBehaviour
         }
     }
 
-    public void RotateTo(Vector3 direction) {
+    public void RotateTo(Vector3 direction)
+    {
         transform.forward = direction;
         Move();
     }
@@ -43,6 +46,11 @@ public class Maze_AR3 : MonoBehaviour
     void Move()
     {
         move = true;
+    }
+
+    void StartLine()
+    {
+        startLine.SetActive(true);
     }
 }
 
