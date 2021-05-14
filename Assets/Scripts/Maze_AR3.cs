@@ -6,6 +6,7 @@ public class Maze_AR3 : MonoBehaviour
 {
     public GameObject ww;
     public GameObject sh;
+    public float moveSpeed = 0.1f;
     bool move;
     Rigidbody rig;
     private void Start()
@@ -13,18 +14,14 @@ public class Maze_AR3 : MonoBehaviour
         Invoke("Move", 2.1f);
         rig = GetComponent<Rigidbody>();
     }
-    void Update()
-    {
+
+    private void FixedUpdate() {
         if (move == true)
         {
-            rig.MovePosition(transform.position + transform.forward * Time.deltaTime * .5f);
-            //transform.Translate(Vector3.forward * Time.deltaTime * .5f);
+            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }
     }
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Wall")) move = false;
-    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "FinishLine")       //�̷� Ż�� ���ϸ��̼�     //��ƼŬ �߰��ϱ�
@@ -37,6 +34,10 @@ public class Maze_AR3 : MonoBehaviour
 
     public void RotateTo(Vector3 direction) {
         transform.forward = direction;
+        Vector3 localRotation = transform.localRotation.eulerAngles;
+        localRotation.x = 0;
+        localRotation.z = 0;
+        transform.localEulerAngles = localRotation;
         Move();
     }
 

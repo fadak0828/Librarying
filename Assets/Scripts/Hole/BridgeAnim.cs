@@ -12,9 +12,9 @@ public class BridgeAnim : MonoBehaviour
 
     public void FallDown(string direction) {
         if (direction == "left") {
-            transform.DORotate(new Vector3(15, 90, 180), 0.5f);
+            transform.DOLocalRotate(new Vector3(15, 90, 180), 0.5f);
         } else {
-            transform.DORotate(new Vector3(15, -90, 0), 0.5f);
+            transform.DOLocalRotate(new Vector3(15, -90, 0), 0.5f);
         }
     }
 }

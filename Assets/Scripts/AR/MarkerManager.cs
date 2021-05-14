@@ -62,16 +62,22 @@ public class TargetInfo
 
     [HideInInspector]
     public Coroutine destroyCoroutine;
+
+    public float showInScreenTime;
+    public bool isFixed;
 }
 
 public class MarkerManager : MonoBehaviour
 {
+    public float fixedTimeThreshold = 0.3f;
+
     public static MarkerManager Instance;
     public List<TargetInfo> targetList;
     public float smoothTime = 0.1f;
     private ARTrackedImageManager manager;
 
     private int currentPageIndex = -1;
+    private Camera mainCam;
 
     private void Awake()
     {
@@ -82,6 +88,7 @@ public class MarkerManager : MonoBehaviour
     {
         manager = GetComponent<ARTrackedImageManager>();
         manager.trackedImagesChanged += OnTrackedImagesChaged;
+        mainCam = Camera.main;
     }
 
     private void OnDisable()
@@ -141,16 +148,27 @@ public class MarkerManager : MonoBehaviour
                         anim.StartAnim(target.appearAnimation);
                     }
 
-                    if (target.enableTracking)
+                    if (!target.isFixed || Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position) > 1)
                     {
-                        float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
-                        if (moveDistance <= 0.1f) {
+                        // float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
+                        // if (moveDistance <= 0.1f) {
                             target.createdObj.transform.position = Vector3.SmoothDamp(target.createdObj.transform.position, trackedImg.transform.position, ref target.positionVelocity, smoothTime);
-                        } else {
-                            target.createdObj.transform.position = trackedImg.transform.position;
-                        }
+                        // } else {
+                            // target.createdObj.transform.position = trackedImg.transform.position;
+                        // }
 
                         target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(target.createdObj.transform.rotation, trackedImg.transform.rotation, ref target.rotationVelocity, smoothTime);
+
+                        if (!target.enableTracking) {
+                            Vector3 viewportPoint = mainCam.WorldToViewportPoint(trackedImg.transform.position);
+                            if (viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1) {
+                                target.showInScreenTime += Time.deltaTime;
+                            } else {
+                                target.showInScreenTime = 0;
+                            }
+                            target.isFixed = target.showInScreenTime > fixedTimeThreshold;
+                        }
+
                     }
 
                     if (target.destroyCoroutine != null)
@@ -166,6 +184,8 @@ public class MarkerManager : MonoBehaviour
                 }
                 else
                 {
+                    target.isFixed = false;
+                    target.showInScreenTime = 0;
                     // // 화면에서 이미지가 사라진 경우 
                     if (target.pageOption.isStatic) continue;
 

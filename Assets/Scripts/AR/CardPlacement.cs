@@ -7,7 +7,6 @@ using System.Linq;
 // 미로카드 놓는 자리
 public class CardPlacement : MonoBehaviour
 {
-    public string targetTag;
     public bool isCorrect;
     public bool isLoop;
 
@@ -17,12 +16,11 @@ public class CardPlacement : MonoBehaviour
     private Transform[] points;
 
     private float currentTime = 0;
-    private GameObject[] targetList;
+    public GameObject[] targetList;
     private GameObject prevInnerObj;
 
     private void OnEnable() {
         points = transform.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name.Contains("Point")).ToArray();
-        targetList = GameObject.FindGameObjectsWithTag(targetTag);
     }
 
     private void Update() {
