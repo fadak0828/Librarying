@@ -33098,6 +33098,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6036556042006766241, guid: c5f5b1965f5b5084d81ce85e656d9493,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tFrom animation clip 'SHFinished'"
+      objectReference: {fileID: 0}
     - target: {fileID: 6101418126224292501, guid: c5f5b1965f5b5084d81ce85e656d9493,
         type: 3}
       propertyPath: m_IsActive
