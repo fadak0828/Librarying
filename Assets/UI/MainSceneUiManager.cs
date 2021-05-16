@@ -2,18 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 using UnityEngine.SceneManagement;
 
 public class MainSceneUiManager : MonoBehaviour
 {
     public float uiShowingDuration = 3;
     public float animDuration = 0.7f;
+    public OnboadringUIManager onboardingUI;
+    public ARPlaneManager planeManager;
     public Image[] uiObjects;
     private Coroutine hideTimer;
     private bool isShowing = false;
 
     private void Start() {
         SetImagesAlpha(uiObjects, 0);
+        Invoke("ShowFindPlane", 3);
+    }
+
+    private void ShowFindPlane() {
+        planeManager.enabled = true;
+        onboardingUI.ShowUiByName("FindPlane");
     }
 
     public void OnClickScreen() {
