@@ -9,7 +9,7 @@ public class MainSceneUiManager : MonoBehaviour
 {
     public float uiShowingDuration = 3;
     public float animDuration = 0.7f;
-    public OnboadringUIManager onboardingUI;
+    public OnboardingUIManager onboardingUI;
     public ARPlaneManager planeManager;
     public Image[] uiObjects;
     private Coroutine hideTimer;

@@ -65,15 +65,17 @@ public class TargetInfo
 
     public float showInScreenTime;
     public bool isFixed;
+    public TrackingState trackingState = TrackingState.None;
 }
 
 public class MarkerManager : MonoBehaviour
 {
-    public float fixedTimeThreshold = 0.3f;
+    public static float fixedTimeThreshold = 0.3f;
 
     public static MarkerManager Instance;
     public List<TargetInfo> targetList;
     public float smoothTime = 0.1f;
+    public List<TargetInfo> targetPageInfos;
     private ARTrackedImageManager manager;
 
     private int currentPageIndex = -1;
@@ -89,6 +91,7 @@ public class MarkerManager : MonoBehaviour
         manager = GetComponent<ARTrackedImageManager>();
         manager.trackedImagesChanged += OnTrackedImagesChaged;
         mainCam = Camera.main;
+        targetPageInfos = targetList.Where(t => t.pageOption.pageNumber >= 0).ToList();
     }
 
     private void OnDisable()
@@ -104,6 +107,8 @@ public class MarkerManager : MonoBehaviour
             {
                 // 추적 목록에 포함된 이미지인지 체크
                 if (trackedImg.referenceImage.name != target.name) continue;
+
+                target.trackingState = trackedImg.trackingState;
 
                 bool shouldPlayAnim = false;
 
@@ -126,12 +131,11 @@ public class MarkerManager : MonoBehaviour
                                 target.createdObj = target.targetPref;
                                 target.isSceneObject = true;
                             }
+
                             target.createdObj.transform.parent = trackedImg.transform;
-
                             target.createdObj.transform.localPosition = Vector3.zero;
-                            target.createdObj.transform.localRotation = Quaternion.identity;
-
-                            target.createdObj.transform.parent = transform;
+                            target.createdObj.transform.localEulerAngles = Vector3.zero;
+                            target.createdObj.transform.parent = null;
 
                             shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
                         }
@@ -150,11 +154,10 @@ public class MarkerManager : MonoBehaviour
                         }
                     }
 
-                    // if (!target.isFixed || Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position) > 1)
-                    if (!target.isFixed)
-                    {
+                    if (!target.isFixed) {
                         if (target.createdObj != null) {
                             float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
+
                             if (moveDistance <= 0.1f) {
                                 target.createdObj.transform.position = Vector3.SmoothDamp(target.createdObj.transform.position, trackedImg.transform.position, ref target.positionVelocity, smoothTime);
                             } else {
@@ -171,7 +174,20 @@ public class MarkerManager : MonoBehaviour
                             } else {
                                 target.showInScreenTime = 0;
                             }
-                            target.isFixed = target.showInScreenTime > fixedTimeThreshold;
+
+                            if (!target.isFixed && target.showInScreenTime > fixedTimeThreshold) {
+                                target.isFixed = true;
+                                // 고정되는 타겟이 페이지이면 다른 페이지들 오브젝트 감춤                                
+                                if (target.pageOption.pageNumber >= 0) {
+                                    target.showInScreenTime = 0;
+                                    foreach(var pageInfo in targetPageInfos.Where(p => p.createdObj != null).ToArray()) {
+                                        if (pageInfo.pageOption.pageNumber == target.pageOption.pageNumber) continue;
+                                        pageInfo.isFixed = false;
+                                        pageInfo.showInScreenTime = 0;
+                                        CleanImageTrackingObj(pageInfo);
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -186,14 +202,18 @@ public class MarkerManager : MonoBehaviour
                         currentPageIndex = target.pageOption.pageNumber;
                     }
                 }
+                // 화면에서 이미지가 사라진 경우 
                 else
                 {
-
-                    // // 화면에서 이미지가 사라진 경우 
-                    if (target.pageOption.isStatic) continue;
+                    target.showInScreenTime = 0;
+                    if (target.pageOption.isStatic) {
+                        if (target.createdObj != null) {
+                            target.createdObj.transform.parent = null;
+                        }
+                        continue;
+                    }
                     
                     target.isFixed = false;
-                    target.showInScreenTime = 0;
 
                     if (target.createdObj != null) {
                         CleanImageTrackingObj(target);
@@ -235,7 +255,6 @@ public class MarkerManager : MonoBehaviour
         if (target.isSceneObject)
         {
             target.createdObj.SetActive(false);
-            target.createdObj = null;
         }
         else
         {
