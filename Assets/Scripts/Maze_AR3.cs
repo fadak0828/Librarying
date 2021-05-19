@@ -56,7 +56,6 @@ public class Maze_AR3 : MonoBehaviour
     void Move()
     {
         move = true;
-        print(0);
     }
 
     void StartLine()
