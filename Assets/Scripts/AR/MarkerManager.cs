@@ -76,6 +76,7 @@ public class MarkerManager : MonoBehaviour
     public List<TargetInfo> targetList;
     public float smoothTime = 0.1f;
     public List<TargetInfo> targetPageInfos;
+    public GameObject btnPageReplay;
     private ARTrackedImageManager manager;
 
     private int currentPageIndex = -1;
@@ -84,6 +85,10 @@ public class MarkerManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        targetList.ForEach(t => {
+            t.createdObj = Instantiate(t.targetPref);
+            t.createdObj.SetActive(false);
+        });
     }
 
     private void OnEnable()
@@ -112,36 +117,18 @@ public class MarkerManager : MonoBehaviour
 
                 bool shouldPlayAnim = false;
 
+                // 화면에 이미지가 보이는 경우
                 if (trackedImg.trackingState == TrackingState.Tracking)
                 {
+                    // 페이지가 아닌 오브젝트 또는 고정된 페이지면
                     if (target.pageOption.pageNumber == -1 || target.isFixed) {
-                        // 화면에 이미지가 보이는 경우
-                        if (target.createdObj == null)
-                        {
-                            if (target.targetPref?.gameObject?.scene.name == null)
-                            {
-                                // 프리팹을 사용하는 경우
-                                // 오브젝트가 아직 생성되지 않았으면 새로 생성
-                                target.createdObj = Instantiate(target.targetPref);
-                            }
-                            else
-                            {
-                                // 씬 오브젝트를 사용하는 경우
-                                // target 정보에 연결
-                                target.createdObj = target.targetPref;
-                                target.isSceneObject = true;
-                            }
 
+                        if (!target.createdObj.activeSelf) {
+                            shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
                             target.createdObj.transform.parent = trackedImg.transform;
                             target.createdObj.transform.localPosition = Vector3.zero;
                             target.createdObj.transform.localEulerAngles = Vector3.zero;
                             target.createdObj.transform.parent = null;
-
-                            shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
-                        }
-
-                        if (!target.createdObj.activeSelf) {
-                            shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
                             target.createdObj.SetActive(true);
                         }
                         
@@ -215,9 +202,7 @@ public class MarkerManager : MonoBehaviour
                     
                     target.isFixed = false;
 
-                    if (target.createdObj != null) {
-                        CleanImageTrackingObj(target);
-                    }
+                    CleanImageTrackingObj(target);
 
                     if (target.destroyImmediately)
                     {
@@ -229,6 +214,21 @@ public class MarkerManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        btnPageReplay.SetActive(targetPageInfos.FirstOrDefault(pi => pi.createdObj && pi.createdObj.activeSelf) != null);
+    }
+
+    [ContextMenu("ResetCurrentPage")]
+    public void ResetCurrentPage() {
+        TargetInfo currentPage = targetPageInfos.FirstOrDefault(pi => pi.createdObj && pi.createdObj.activeSelf);
+        if (currentPage == null) {
+            Debug.LogError("열려있는 페이지가 없습니다");
+        } else {
+            GameObject newPageObj = Instantiate(currentPage.targetPref, currentPage.createdObj.transform.parent);
+            GameObject prevObj = currentPage.createdObj;
+            currentPage.createdObj = newPageObj;
+            Destroy(prevObj);
         }
     }
 
@@ -251,17 +251,7 @@ public class MarkerManager : MonoBehaviour
     }
 
     private void CleanImageTrackingObj(TargetInfo target) {
-        // dontDestory가 체크되어 있거나, 프리팹이 아닌 씬 오브젝트를 사용한 경우 파괴하지 않고 비활성화
-        if (target.isSceneObject)
-        {
-            target.createdObj.SetActive(false);
-        }
-        else
-        {
-            // 만들어진 오브젝트가 있으면 파괴
-            Destroy(target.createdObj);
-            target.createdObj = null;
-        }
+        target.createdObj.SetActive(false);
     }
 
     private IEnumerator IeDestroyTimer(TargetInfo target, float time = 3)
