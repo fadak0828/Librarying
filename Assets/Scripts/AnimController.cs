@@ -88,6 +88,7 @@ public class AnimController : MonoBehaviour
     }
     IEnumerator Eight()
     {
+        //sh.transform.GetChild(1).gameObject.SetActive(false);
         wwAnim.SetTrigger("Power");
         yield return new WaitForSeconds(2.1f);
         sh.transform.GetChild(0).gameObject.SetActive(true);
