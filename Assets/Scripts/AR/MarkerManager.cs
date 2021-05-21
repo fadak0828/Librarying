@@ -146,12 +146,22 @@ public class MarkerManager : MonoBehaviour
                             float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
 
                             if (moveDistance <= 0.1f) {
-                                target.createdObj.transform.position = Vector3.SmoothDamp(target.createdObj.transform.position, trackedImg.transform.position, ref target.positionVelocity, smoothTime);
+                                target.createdObj.transform.position = Vector3.SmoothDamp(
+                                    target.createdObj.transform.position, 
+                                    trackedImg.transform.position, 
+                                    ref target.positionVelocity, 
+                                    smoothTime
+                                );
                             } else {
                                 target.createdObj.transform.position = trackedImg.transform.position;
                             }
 
-                            target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(target.createdObj.transform.rotation, trackedImg.transform.rotation, ref target.rotationVelocity, smoothTime);
+                            target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(
+                                target.createdObj.transform.rotation, 
+                                trackedImg.transform.rotation, 
+                                ref target.rotationVelocity, 
+                                smoothTime
+                            );
                         }
 
                         if (!target.enableTracking || target.pageOption.pageNumber >= 0) {

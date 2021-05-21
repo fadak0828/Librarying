@@ -40,10 +40,10 @@ public class AnimController : MonoBehaviour
                 Three(); break;
             case Page.AR4:
                 Four(); break;
-            case Page.AR6:
-                Six(); break;
+        //    case Page.AR6:
+        //        Six(); break;
             case Page.AR7:
-               // StartCoroutine( Seven()); break;
+               Seven(); break;
             case Page.AR8:
                 StartCoroutine(Eight()); break;
         }
@@ -69,7 +69,7 @@ public class AnimController : MonoBehaviour
             shAnim.SetTrigger("Run");
             check = true;
         }
-        yield return new WaitForSeconds(2.53f);
+        yield return new WaitForSeconds(2.1f);
         wangwang.transform.Translate(Vector3.forward * Time.deltaTime*0.4f);
     }
     void Three()
@@ -82,7 +82,7 @@ public class AnimController : MonoBehaviour
         wwAnim.SetTrigger("Questioning");
         shAnim.SetTrigger("Point");
     }
-    void Six()
+    void Seven()
     {
         wwAnim.SetTrigger("LookInto");
     }

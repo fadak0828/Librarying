@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd607c3f010ab45a29ecfcf8d5a898ef, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  ARCompanionAppIP: 192.168.1.154
+  ARCompanionAppIP: 192.168.1.160
   editorGameViewSettings:
     resolutionScale: 0.33333334
     maxEditorViewFps: 10
@@ -34,7 +34,7 @@ MonoBehaviour:
       sendARKitBlendshapes: 1
   packages:
   - displayName: AR Foundation Remote
-    version: 4.11.0
+    version: 4.11.3
     id: com.kyrylokuzyk.arfoundationremote
   - displayName: AR Foundation
     version: 4.1.7
@@ -45,6 +45,9 @@ MonoBehaviour:
   - displayName: ARKit XR Plugin
     version: 4.0.12
     id: com.unity.xr.arkit
+  - displayName: AR Subsystems
+    version: 4.1.7
+    id: com.unity.xr.arsubsystems
   port: 44819
   embeddedImageLibraries:
   - {fileID: 11400000, guid: 7291f4b7bc3a64f4483844ed8fe4a91a, type: 2}
@@ -54,4 +57,4 @@ MonoBehaviour:
     showTelepathyWarningsAndErrors: 1
     printCompanionAppIPsToConsole: 0
     warnIfReceiverConnectionWasDestroyed: 0
-    warnIfGameViewIsNotFocused: 0
+    warnIfGameViewIsNotFocused: 1

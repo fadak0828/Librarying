@@ -60,7 +60,7 @@ public class ArSceneManager : MonoBehaviour
         switch(currentState) {
             case ArSceneState.FIND_BOOK:
                 int trackedCount = markerManager.targetList.Count(t => t.createdObj != null && t.createdObj.activeSelf);
-                if (currentStateTimer >= 3) {
+                if (currentStateTimer >= 1.5f) {
                     if (onboadringUIManager.GetCurrentClipName() == "None" && trackedCount == 0) {
                         onboadringUIManager.ShowUiByName("FindBook");
                     }

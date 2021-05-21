@@ -37,6 +37,13 @@ namespace ARFoundationRemote.Editor {
 
         public static void UnInstallPlugin() {
             #if AR_FOUNDATION_REMOTE_INSTALLED
+                #if AR_FOUNDATION_REMOTE_4_12_0_OR_NEWER
+                if (EditorUtility.IsDirty(Runtime.SessionRecordings.Instance)) {
+                    Debug.LogError($"{displayName}: please save the SessionRecordings.asset before uninstall to prevent file corruption.");
+                    return;
+                }
+                #endif
+            
             if (FixesForEditorSupport.Undo()) {
                 Debug.LogError($"{displayName}: undoing AR Foundation fixes... Please press the 'Un-install Plugin' button again.");
                 return;
@@ -181,6 +188,10 @@ namespace ARFoundationRemote.Editor {
             File.Delete($"{source}.meta");
             #if UNITY_2020_1_OR_NEWER
             Client.Resolve();
+            #elif UNITY_2019_4_OR_NEWER
+            var method = typeof(Client).GetMethod("Resolve", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
+            Assert.IsNotNull(method);
+            method.Invoke(null, null);
             #else
             AssetDatabase.Refresh();
             #endif

@@ -27,6 +27,14 @@ namespace ARFoundationRemote.Editor {
                 GUILayout.Space(16);
                 GUILayout.Label("AR Companion app", EditorStyles.boldLabel);
                 if (GUILayout.Button("Install AR Companion App", new GUIStyle(GUI.skin.button) {fontStyle = FontStyle.Bold})) {
+                    AutoARFoundationFixes.Enabled = true;
+                    #if AR_FOUNDATION_REMOTE_INSTALLED
+                    if (FixesForEditorSupport.Apply()) {
+                        Debug.LogError($"{ARFoundationRemoteInstaller.displayName}: applying AR Foundation fixes... Please retry the AR Companion app installation.");
+                        return;
+                    }
+                    #endif
+                
                     execute(() => CompanionAppInstaller.BuildAndRun(target.optionalCompanionAppExtension, target.modifyAppId));
                 }
 
@@ -46,8 +54,8 @@ namespace ARFoundationRemote.Editor {
 
                 GUILayout.Space(16);
                 if (GUILayout.Button("Apply AR Foundation fixes")) {
+                    AutoARFoundationFixes.Enabled = true;
                     #if AR_FOUNDATION_REMOTE_INSTALLED
-                        AutoARFoundationFixes.Enabled = true;
                         FixesForEditorSupport.Apply(true);
                     #endif
                 }

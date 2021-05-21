@@ -17,7 +17,7 @@ public class MainSceneUiManager : MonoBehaviour
 
     private void Start() {
         SetImagesAlpha(uiObjects, 0);
-        Invoke("ShowFindPlane", 3);
+        Invoke("ShowFindPlane", 1.5f);
     }
 
     private void ShowFindPlane() {
