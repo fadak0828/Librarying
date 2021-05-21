@@ -92,7 +92,7 @@ public class AnimController : MonoBehaviour
         wwAnim.SetTrigger("Power");
         yield return new WaitForSeconds(2.1f);
         sh.transform.GetChild(0).gameObject.SetActive(true);
-        yield return new WaitForSeconds(6.5f);
+        yield return new WaitForSeconds(6f);
         sh.transform.GetChild(1).gameObject.SetActive(true);
     }
 }
