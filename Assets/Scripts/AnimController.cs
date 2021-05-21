@@ -70,7 +70,7 @@ public class AnimController : MonoBehaviour
             check = true;
         }
         yield return new WaitForSeconds(2.1f);
-        wangwang.transform.Translate(Vector3.forward * Time.deltaTime*0.4f);
+        wangwang.transform.Translate(Vector3.forward * Time.deltaTime * 0.03f);
     }
     void Three()
     {
