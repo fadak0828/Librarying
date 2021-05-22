@@ -19,9 +19,8 @@ public class KnockEffect : MonoBehaviour
         doorAnim.enabled = false;
         hand.SetActive(false);
     }
-    private void OnTriggerEnter(Collider other)         //QR카드 인식으로 작동하는 부분
-    {
-        //other.GetComponent<MeshRenderer>().enabled = false;
+
+    public void PlayKnock() {
         GetComponent<MeshRenderer>().enabled = false;
         for (int i = 0; i < 4; i++)
         {
@@ -31,6 +30,7 @@ public class KnockEffect : MonoBehaviour
         hand.SetActive(true);
         Invoke("DoorOpen", 1.7f);
     }
+
     void DoorOpen()
     {
         doorAnim.enabled = true;
