@@ -49,6 +49,8 @@ public class MazeCardPlace : MonoBehaviour
             } else {
                 GameObject effect = Instantiate(effectPref, transform);
                 effect.transform.localScale = Vector3.one * 15;
+                innerMazeCardModel.transform.localPosition = Vector3.zero;
+                innerMazeCardModel.transform.localRotation = Quaternion.identity;
             }
         } else {
             if (innerMazeCard != null) {

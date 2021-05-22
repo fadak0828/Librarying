@@ -47,6 +47,7 @@ public class TargetInfo
     public bool destroyImmediately = true;
 
     public GameObject targetPref;
+    public bool noClone = false;
 
     [HideInInspector]
     public GameObject createdObj;
@@ -70,7 +71,7 @@ public class TargetInfo
 
 public class MarkerManager : MonoBehaviour
 {
-    public static float fixedTimeThreshold = 0.3f;
+    public static float fixedTimeThreshold = 0.6f;
 
     public static MarkerManager Instance;
     public List<TargetInfo> targetList;
@@ -86,7 +87,11 @@ public class MarkerManager : MonoBehaviour
     {
         Instance = this;
         targetList.ForEach(t => {
-            t.createdObj = Instantiate(t.targetPref);
+            if (!t.noClone) {
+                t.createdObj = Instantiate(t.targetPref);
+            } else {
+                t.createdObj = t.targetPref;
+            }
             t.createdObj.SetActive(false);
         });
     }
