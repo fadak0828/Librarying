@@ -9,6 +9,18 @@ public class WangWangWalkDust : MonoBehaviour
     public GameObject dustPref;
     public Vector3 positionOffset;
     public float scaleOffset;
+    public AudioClip walkSfxClip;
+    private AudioSource audioSource;
+    private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+        audioSource.pitch = 1.2f;
+        audioSource.clip = walkSfxClip;
+    }
 
     private void CreateDust(Transform landedFootTransform) {
         Instantiate(dustPref, landedFootTransform.position + positionOffset, landedFootTransform.rotation).transform.localScale *= transform.lossyScale.magnitude * scaleOffset;
@@ -16,9 +28,13 @@ public class WangWangWalkDust : MonoBehaviour
 
     public void OnLandLeftFoot() {
         CreateDust(leftFoot);
+        audioSource.Stop();
+        audioSource.Play();
     }
 
     public void OnLandRightFoot() {
         CreateDust(rightFoot);
+        audioSource.Stop();
+        audioSource.Play();
     }
 }
