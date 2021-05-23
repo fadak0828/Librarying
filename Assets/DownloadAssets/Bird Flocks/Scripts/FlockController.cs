@@ -188,7 +188,9 @@ public class FlockController:MonoBehaviour{
     //Instantly destroys all birds
     public void destroyBirds() {
     		for(int i = 0; i < _roamers.Count; i++) {
-    			Destroy((_roamers[i]).gameObject);	
+				if (_roamers[i] && _roamers[i].gameObject) {
+	    			Destroy(_roamers[i].gameObject);	
+				}
     		}
     		_childAmount = 0;
     		_roamers.Clear();
