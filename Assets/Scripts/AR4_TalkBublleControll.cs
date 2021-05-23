@@ -11,7 +11,8 @@ public class AR4_TalkBublleControll : MonoBehaviour
     }
     void Update()
     {
-        transform.forward = cam.transform.position;
+        transform.LookAt(cam.transform.position);
+        transform.Rotate(Vector3.up * 45);
         //transform.eulerAngles = Camera.main.transform.eulerAngles;
     }
 }
