@@ -6,13 +6,15 @@ public class AR09CardPlacement : CardPlacement
 {
     private KnockEffect knock;
 
-    private void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
         knock = GetComponent<KnockEffect>();
     }
 
     protected override void OnCardPlacement()
     {
         base.OnCardPlacement();
+        print("KnockCard Placed");
         knock.PlayKnock();
     }
 }
