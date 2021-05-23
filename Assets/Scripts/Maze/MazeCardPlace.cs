@@ -20,9 +20,12 @@ public class MazeCardPlace : MonoBehaviour
 
     public GameObject effectPref;
 
+    private AudioSource audioSource;
+
     private void Awake() {
         cardPivot = gameObject;
         // cards = GameObject.FindGameObjectsWithTag("MazeCard");
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -43,6 +46,11 @@ public class MazeCardPlace : MonoBehaviour
                 innerMazeCardModel.transform.forward = (Vector3)side;
             }
             isCorrect = side == transform.forward && includeCard.name.Contains(answerName);
+
+            if (!includeCard.name.Contains(answerName) && !audioSource.isPlaying) {
+                audioSource.Stop();
+                audioSource.Play();
+            }
 
             if (!isCorrect) {
                 innerMazeCardModel.transform.parent = innerMazeCard.transform;
