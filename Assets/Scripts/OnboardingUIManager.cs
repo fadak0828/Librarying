@@ -12,11 +12,6 @@ public enum OnboardingUIState {
     FIND_NEXT_PAGE
 }
 
-public class OnboardingUI {
-    public readonly static string ZOOM_QR = "ZoomQR";
-    public readonly static string SHAKE_PHONE = "ShakePhone";
-}
-
 public class OnboardingUIManager : MonoBehaviour
 {
     public static OnboardingUIManager Instance;

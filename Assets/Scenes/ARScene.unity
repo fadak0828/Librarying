@@ -18292,7 +18292,111 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetList:
-  - name: BookCover
+  - name: QR_Glass
+    appearAnimation: 1
+    disappearAnimation: 0
+    pageOption:
+      pageNumber: -1
+      isStatic: 0
+    enableTracking: 1
+    destroyImmediately: 1
+    targetPref: {fileID: 1634213702}
+    noClone: 1
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+    showInScreenTime: 0
+    isFixed: 0
+    trackingState: 0
+  - name: QR_Puzzle1
+    appearAnimation: 0
+    disappearAnimation: 0
+    pageOption:
+      pageNumber: -1
+      isStatic: 0
+    enableTracking: 1
+    destroyImmediately: 1
+    targetPref: {fileID: 3931959999698260468}
+    noClone: 1
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+    showInScreenTime: 0
+    isFixed: 0
+    trackingState: 0
+  - name: QR_Puzzle2
+    appearAnimation: 0
+    disappearAnimation: 0
+    pageOption:
+      pageNumber: -1
+      isStatic: 0
+    enableTracking: 1
+    destroyImmediately: 1
+    targetPref: {fileID: 6683021733928067031}
+    noClone: 1
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+    showInScreenTime: 0
+    isFixed: 0
+    trackingState: 0
+  - name: QR_Help
+    appearAnimation: 0
+    disappearAnimation: 0
+    pageOption:
+      pageNumber: -1
+      isStatic: 0
+    enableTracking: 1
+    destroyImmediately: 1
+    targetPref: {fileID: 813817479}
+    noClone: 1
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+    showInScreenTime: 0
+    isFixed: 0
+    trackingState: 0
+  - name: QR_Arrow
+    appearAnimation: 0
+    disappearAnimation: 0
+    pageOption:
+      pageNumber: -1
+      isStatic: 0
+    enableTracking: 1
+    destroyImmediately: 1
+    targetPref: {fileID: 1067726841}
+    noClone: 1
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+    showInScreenTime: 0
+    isFixed: 0
+    trackingState: 0
+  - name: QR_Knock
+    appearAnimation: 0
+    disappearAnimation: 0
+    pageOption:
+      pageNumber: -1
+      isStatic: 0
+    enableTracking: 1
+    destroyImmediately: 1
+    targetPref: {fileID: 2050714278}
+    noClone: 1
+    createdObj: {fileID: 0}
+    isSceneObject: 0
+    positionVelocity: {x: 0, y: 0, z: 0}
+    rotationVelocity: {x: 0, y: 0, z: 0}
+    showInScreenTime: 0
+    isFixed: 0
+    trackingState: 0
+  smoothTime: 0.02
+  targetPageInfos:
+  - name: Page0
     appearAnimation: 0
     disappearAnimation: 0
     pageOption:
@@ -18446,108 +18550,6 @@ MonoBehaviour:
     showInScreenTime: 0
     isFixed: 0
     trackingState: 0
-  - name: QR_Glass
-    appearAnimation: 1
-    disappearAnimation: 0
-    pageOption:
-      pageNumber: -1
-      isStatic: 0
-    enableTracking: 1
-    destroyImmediately: 1
-    targetPref: {fileID: 1634213702}
-    noClone: 1
-    createdObj: {fileID: 0}
-    isSceneObject: 0
-    positionVelocity: {x: 0, y: 0, z: 0}
-    rotationVelocity: {x: 0, y: 0, z: 0}
-    showInScreenTime: 0
-    isFixed: 0
-    trackingState: 0
-  - name: QR_Puzzle1
-    appearAnimation: 0
-    disappearAnimation: 0
-    pageOption:
-      pageNumber: -1
-      isStatic: 0
-    enableTracking: 1
-    destroyImmediately: 1
-    targetPref: {fileID: 3931959999698260468}
-    noClone: 1
-    createdObj: {fileID: 0}
-    isSceneObject: 0
-    positionVelocity: {x: 0, y: 0, z: 0}
-    rotationVelocity: {x: 0, y: 0, z: 0}
-    showInScreenTime: 0
-    isFixed: 0
-    trackingState: 0
-  - name: QR_Puzzle2
-    appearAnimation: 0
-    disappearAnimation: 0
-    pageOption:
-      pageNumber: -1
-      isStatic: 0
-    enableTracking: 1
-    destroyImmediately: 1
-    targetPref: {fileID: 6683021733928067031}
-    noClone: 1
-    createdObj: {fileID: 0}
-    isSceneObject: 0
-    positionVelocity: {x: 0, y: 0, z: 0}
-    rotationVelocity: {x: 0, y: 0, z: 0}
-    showInScreenTime: 0
-    isFixed: 0
-    trackingState: 0
-  - name: QR_Help
-    appearAnimation: 0
-    disappearAnimation: 0
-    pageOption:
-      pageNumber: -1
-      isStatic: 0
-    enableTracking: 1
-    destroyImmediately: 1
-    targetPref: {fileID: 813817479}
-    noClone: 1
-    createdObj: {fileID: 0}
-    isSceneObject: 0
-    positionVelocity: {x: 0, y: 0, z: 0}
-    rotationVelocity: {x: 0, y: 0, z: 0}
-    showInScreenTime: 0
-    isFixed: 0
-    trackingState: 0
-  - name: QR_Arrow
-    appearAnimation: 0
-    disappearAnimation: 0
-    pageOption:
-      pageNumber: -1
-      isStatic: 0
-    enableTracking: 1
-    destroyImmediately: 1
-    targetPref: {fileID: 1067726841}
-    noClone: 1
-    createdObj: {fileID: 0}
-    isSceneObject: 0
-    positionVelocity: {x: 0, y: 0, z: 0}
-    rotationVelocity: {x: 0, y: 0, z: 0}
-    showInScreenTime: 0
-    isFixed: 0
-    trackingState: 0
-  - name: QR_Knock
-    appearAnimation: 0
-    disappearAnimation: 0
-    pageOption:
-      pageNumber: -1
-      isStatic: 0
-    enableTracking: 1
-    destroyImmediately: 1
-    targetPref: {fileID: 2050714278}
-    noClone: 1
-    createdObj: {fileID: 0}
-    isSceneObject: 0
-    positionVelocity: {x: 0, y: 0, z: 0}
-    rotationVelocity: {x: 0, y: 0, z: 0}
-    showInScreenTime: 0
-    isFixed: 0
-    trackingState: 0
   - name: Page9
     appearAnimation: 0
     disappearAnimation: 0
@@ -18582,9 +18584,10 @@ MonoBehaviour:
     showInScreenTime: 0
     isFixed: 0
     trackingState: 0
-  smoothTime: 0.02
-  targetPageInfos: []
   btnPageReplay: {fileID: 1046756504}
+  trackingLibrary: {fileID: 11400000, guid: 7291f4b7bc3a64f4483844ed8fe4a91a, type: 2}
+  currentPageIndex: 0
+  currentTrackingTargets: []
 --- !u!114 &1069271911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28673,6 +28676,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1664799766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2722361180613425929, guid: 948c2095b3747774194f9a0b8d1cafd0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1926422736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1667029510 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4680466217024130, guid: afb9b404f72c6904489233b697c4a95c,
@@ -34458,6 +34473,21 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6552933871971641563, guid: 948c2095b3747774194f9a0b8d1cafd0,
+        type: 3}
+      propertyPath: nextPageBtn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552933871971641563, guid: 948c2095b3747774194f9a0b8d1cafd0,
+        type: 3}
+      propertyPath: prevPageBtn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552933871971641563, guid: 948c2095b3747774194f9a0b8d1cafd0,
+        type: 3}
+      propertyPath: arDetectionText
+      value: 
+      objectReference: {fileID: 1664799766}
     - target: {fileID: 6552933871971641565, guid: 948c2095b3747774194f9a0b8d1cafd0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -34471,7 +34501,7 @@ PrefabInstance:
     - target: {fileID: 6552933871971641565, guid: 948c2095b3747774194f9a0b8d1cafd0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6552933871971641565, guid: 948c2095b3747774194f9a0b8d1cafd0,
         type: 3}

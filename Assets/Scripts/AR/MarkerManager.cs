@@ -78,10 +78,13 @@ public class MarkerManager : MonoBehaviour
     public float smoothTime = 0.1f;
     public List<TargetInfo> targetPageInfos;
     public GameObject btnPageReplay;
+    public XRReferenceImageLibrary trackingLibrary;
     private ARTrackedImageManager manager;
 
-    private int currentPageIndex = -1;
+    [HideInInspector]
+    public int currentPageIndex = 0;
     private Camera mainCam;
+    public List<TargetInfo> currentTrackingTargets;
 
     private void Awake()
     {
@@ -94,14 +97,24 @@ public class MarkerManager : MonoBehaviour
             }
             t.createdObj.SetActive(false);
         });
+        targetPageInfos.ForEach(t => {
+            if (!t.noClone) {
+                t.createdObj = Instantiate(t.targetPref);
+            } else {
+                t.createdObj = t.targetPref;
+            }
+            t.createdObj.SetActive(false);
+        });
     }
 
     private void OnEnable()
     {
         manager = GetComponent<ARTrackedImageManager>();
+        ResetTrackingLibrary();
         manager.trackedImagesChanged += OnTrackedImagesChaged;
         mainCam = Camera.main;
-        targetPageInfos = targetList.Where(t => t.pageOption.pageNumber >= 0).ToList();
+        // targetPageInfos = targetList.Where(t => t.pageOption.pageNumber >= 0).ToList();
+        RefreshCurretTrackingTargets();
     }
 
     private void OnDisable()
@@ -109,11 +122,17 @@ public class MarkerManager : MonoBehaviour
         manager.trackedImagesChanged -= OnTrackedImagesChaged;
     }
 
+    public void RefreshCurretTrackingTargets() {
+        currentTrackingTargets = new List<TargetInfo>(targetList);
+        targetPageInfos.ForEach(pi => currentTrackingTargets.Add(pi));
+        // currentTrackingTargets.Add(targetPageInfos[currentPageIndex]);
+    }
+
     private void OnTrackedImagesChaged(ARTrackedImagesChangedEventArgs args)
     {
         foreach (ARTrackedImage trackedImg in args.updated)
         {
-            foreach (TargetInfo target in targetList)
+            foreach (TargetInfo target in currentTrackingTargets)
             {
                 // 추적 목록에 포함된 이미지인지 체크
                 if (trackedImg.referenceImage.name != target.name) continue;
@@ -181,6 +200,7 @@ public class MarkerManager : MonoBehaviour
                                 target.isFixed = true;
                                 // 고정되는 타겟이 페이지이면 다른 페이지들 오브젝트 감춤                                
                                 if (target.pageOption.pageNumber >= 0) {
+                                    ResetTrackingLibrary();
                                     target.showInScreenTime = 0;
                                     foreach(var pageInfo in targetPageInfos.Where(p => p.createdObj != null).ToArray()) {
                                         if (pageInfo.pageOption.pageNumber == target.pageOption.pageNumber) continue;
@@ -274,5 +294,13 @@ public class MarkerManager : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         DestroyImageTrackingObj(target);
+    }
+
+    public void ResetTrackingLibrary() {
+        manager.enabled = false;
+        manager.referenceLibrary = manager.CreateRuntimeLibrary(trackingLibrary);
+        manager.enabled = true;
+
+        targetPageInfos.ForEach(pi => pi.showInScreenTime = 0);
     }
 }
