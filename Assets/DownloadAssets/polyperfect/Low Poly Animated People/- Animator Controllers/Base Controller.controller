@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1102 &-6184671033406372182
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Wizard_Attack
+  m_Speed: 0.67
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 345e9696f3af2ff4694d0016e1a861fe, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -976,7 +1002,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Kick_LeftFoot
-  m_Speed: 2
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101884940382103146}
@@ -1086,48 +1112,10 @@ AnimatorStateMachine:
   m_Name: Locomotion
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 1102439408946761120}
-    m_Position: {x: 810, y: 260, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102735647398332952}
-    m_Position: {x: 1130, y: 310, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102337150833764236}
-    m_Position: {x: 480, y: 360, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102306539818634722}
-    m_Position: {x: 480, y: 168, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102645161423042642}
-    m_Position: {x: 480, y: 456, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102367910214155616}
-    m_Position: {x: 480, y: 264, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102626939116555200}
-    m_Position: {x: 480, y: 408, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102831530537223616}
-    m_Position: {x: 480, y: 216, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102426341990415106}
-    m_Position: {x: 480, y: 120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102739806260566702}
-    m_Position: {x: 1128, y: 276, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1946822320336944364}
-    m_Position: {x: 920, y: 170, z: 0}
+    m_State: {fileID: -6184671033406372182}
+    m_Position: {x: 100, y: 330, z: 0}
   m_ChildStateMachines: []
-  m_AnyStateTransitions:
-  - {fileID: 1101148935323268244}
-  - {fileID: 1101017604021777112}
-  - {fileID: 1101743337257543724}
-  - {fileID: 1101664142754384074}
-  - {fileID: 1101926542628068842}
-  - {fileID: 1101025442340955038}
-  - {fileID: 1101891005463279188}
-  - {fileID: 1101249946642827772}
+  m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
@@ -1135,7 +1123,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 48, y: 156, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102439408946761120}
+  m_DefaultState: {fileID: -6184671033406372182}
 --- !u!1102 &1946822320336944364
 AnimatorState:
   serializedVersion: 6

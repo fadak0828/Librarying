@@ -8,23 +8,23 @@ public class Maze_AR3 : MonoBehaviour
     public GameObject sh;
     public float moveSpeed = 0.1f;
     public GameObject startLine;
-    public GameObject finishZone;
+    public GameObject finishGate;
     public GameObject finishPosition;
     bool move;
-    bool finish;
+    public bool finish;
     Rigidbody rig;
     private void Start()
     {
         Invoke("Move", 2.1f);
         rig = GetComponent<Rigidbody>();
         Invoke("StartLine", 3.5f);
-        finishZone.SetActive(false);
+        //finishZone.SetActive(false);
     }
 
     private void FixedUpdate() {
         if (move == true)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
+            rig.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
         }
         if(finish==true)
             transform.position = Vector3.MoveTowards(transform.position, finishPosition.transform.position, .2f * Time.deltaTime);
@@ -37,7 +37,8 @@ public class Maze_AR3 : MonoBehaviour
             ww.GetComponent<Animator>().SetTrigger("Finish");
             sh.GetComponent<Animator>().SetTrigger("Finish");
             GetComponent<Animator>().Play("MazeClear");
-            finishZone.SetActive(true);            
+            //finishZone.SetActive(true);
+            finishGate.GetComponent<Animator>().enabled = true;
             move = false;
             finish = true;
         }
