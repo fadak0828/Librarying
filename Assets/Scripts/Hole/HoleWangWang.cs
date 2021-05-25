@@ -15,9 +15,6 @@ public enum HoleWangWangState {
 
 public class HoleWangWang : MonoBehaviour
 {
-    public Transform leftFoot;
-    public Transform rightFoot;
-    public GameObject dustPref;
     public BridgeAnim[] bridges;
 
     [SerializeField]
@@ -57,22 +54,10 @@ public class HoleWangWang : MonoBehaviour
         }
     }
 
-    private void CreateDust(Transform landedFootTransform) {
-        if (shakeBridge) {
-            foreach(var bridge in bridges) {
-                print("bridge");
-                bridge.PlayBounceAnim();
-            }
-        }
-        Instantiate(dustPref, landedFootTransform.position, landedFootTransform.rotation).transform.localScale *= transform.lossyScale.magnitude * 0.1f;
-    }
-
     public void OnLandLeftFoot() {
-        CreateDust(leftFoot);
     }
 
     public void OnLandRightFoot() {
-        CreateDust(rightFoot);
     }
 
     private void OnTriggerEnter(Collider other) {
