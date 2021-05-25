@@ -10,14 +10,18 @@ public class Maze_AR3 : MonoBehaviour
     public GameObject startLine;
     public GameObject finishGate;
     public GameObject finishPosition;
+    public NextPageTimer nextPageUi;
     bool move;
     public bool finish;
     Rigidbody rig;
+
+    private AudioSource audioSource;
     private void Start()
     {
         Invoke("Move", 2.1f);
         rig = GetComponent<Rigidbody>();
         Invoke("StartLine", 3.5f);
+        audioSource = GetComponent<AudioSource>();
         //finishZone.SetActive(false);
     }
 
@@ -41,6 +45,10 @@ public class Maze_AR3 : MonoBehaviour
             finishGate.GetComponent<Animator>().enabled = true;
             move = false;
             finish = true;
+
+            nextPageUi.enabled = true;
+            audioSource.Stop();
+            audioSource.Play();
         }
     }
 

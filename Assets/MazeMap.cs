@@ -8,6 +8,11 @@ public class MazeMap : MonoBehaviour
     public WangWangBusAnim wangwangBusAnim;
     public MazeCardPlace[] mazeCardPlaces;
     public bool allCorrectPlaced = false;
+    private AudioSource audioSource;
+
+    private void Start() {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update() {
         UpdateMazeClearState();
@@ -22,5 +27,16 @@ public class MazeMap : MonoBehaviour
 
     private void OnMazeClear() {
         wangwangBusAnim.PlayAnim();
+        Invoke("ShowFindNextUI", 10);
+        Invoke("PlayVoice", 6.3f);
+    }
+
+    private void PlayVoice() {
+        audioSource.Stop();
+        audioSource.Play();
+    }
+
+    private void ShowFindNextUI() {
+        OnboardingUIManager.Instance.ShowUiByName("FindNextPage");
     }
 }

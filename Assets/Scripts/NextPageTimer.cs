@@ -5,18 +5,16 @@ using UnityEngine;
 public class NextPageTimer : MonoBehaviour
 {
     public float delay = 10;
-    public float timer = 0;
+    public bool isManual = false;
 
     private void OnEnable() {
-        timer = 0;
+        if (!isManual) {
+            Invoke("ShowFindNextPageUI", delay);
+        }
     }
 
-    private void Update() {
-        timer += Time.deltaTime;
-
-        if (timer >= delay) {
-            ShowFindNextPageUI();
-        }
+    private void OnDisable() {
+        CancelInvoke();    
     }
 
     public void ShowFindNextPageUI() {
