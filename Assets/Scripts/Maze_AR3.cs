@@ -21,13 +21,17 @@ public class Maze_AR3 : MonoBehaviour
         //finishZone.SetActive(false);
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         if (move == true)
         {
             rig.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
         }
-        if(finish==true)
-            transform.position = Vector3.MoveTowards(transform.position, finishPosition.transform.position, .2f * Time.deltaTime);
+        if (finish == true)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, finishPosition.transform.position, .05f * Time.deltaTime);
+            finishPosition.GetComponent<AudioSource>().enabled=true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
