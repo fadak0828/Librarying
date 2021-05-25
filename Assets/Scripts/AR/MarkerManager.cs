@@ -200,6 +200,9 @@ public class MarkerManager : MonoBehaviour
                                 target.isFixed = true;
                                 // 고정되는 타겟이 페이지이면 다른 페이지들 오브젝트 감춤                                
                                 if (target.pageOption.pageNumber >= 0) {
+                                    if (OnboardingUIManager.Instance.GetCurrentClipName().Contains("FindNextPage")) {
+                                        OnboardingUIManager.Instance.HideUiByName("FindNextPage");
+                                    }
                                     ResetTrackingLibrary();
                                     target.showInScreenTime = 0;
                                     foreach(var pageInfo in targetPageInfos.Where(p => p.createdObj != null).ToArray()) {
