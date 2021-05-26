@@ -35,5 +35,6 @@ public class KnockEffect : MonoBehaviour
         {
             animals[i].SetActive(true);
         }
+        door.GetComponent<AudioSource>().enabled = true;
     }
 }

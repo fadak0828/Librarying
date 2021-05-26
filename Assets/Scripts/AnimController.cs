@@ -70,7 +70,7 @@ public class AnimController : MonoBehaviour
             check = true;
         }
         yield return new WaitForSeconds(2.1f);
-        wangwang.transform.Translate(Vector3.forward * Time.deltaTime * 0.03f);
+        wangwang.transform.Translate(Vector3.forward * Time.deltaTime * 0.04f);
     }
     void Three()
     {
@@ -90,9 +90,12 @@ public class AnimController : MonoBehaviour
     {
         //sh.transform.GetChild(1).gameObject.SetActive(false);
         wwAnim.SetTrigger("Power");
-        yield return new WaitForSeconds(2.1f);
-        sh.transform.GetChild(0).gameObject.SetActive(true);
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(4.1f);
+        //sh.transform.GetChild(0).gameObject.SetActive(true);
+        sh.transform.GetChild(0).GetComponent<AudioSource>().enabled=true;
+        yield return new WaitForSeconds(4.5f);
         sh.transform.GetChild(1).gameObject.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        sh.transform.GetChild(1).GetComponent<AudioSource>().enabled=true;
     }
 }
