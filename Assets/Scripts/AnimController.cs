@@ -55,7 +55,6 @@ public class AnimController : MonoBehaviour
     {
         shAnim.SetTrigger("Waving");
         wwAnim.SetTrigger("Roar");
-        wwRoar = wangwang.GetComponent<AudioSource>();
     }
     bool check;
     IEnumerator Two()
