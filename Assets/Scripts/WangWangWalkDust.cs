@@ -10,7 +10,7 @@ public class WangWangWalkDust : MonoBehaviour
     public Vector3 positionOffset;
     public float scaleOffset;
     public AudioClip walkSfxClip;
-    public bool notWalking;
+    public bool notWalking = false;
     private AudioSource audioSource;
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
