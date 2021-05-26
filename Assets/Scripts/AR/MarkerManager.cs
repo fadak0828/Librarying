@@ -47,7 +47,6 @@ public class TargetInfo
     public bool destroyImmediately = true;
 
     public GameObject targetPref;
-    public bool noClone = false;
 
     [HideInInspector]
     public GameObject createdObj;
@@ -66,55 +65,30 @@ public class TargetInfo
 
     public float showInScreenTime;
     public bool isFixed;
-    public TrackingState trackingState = TrackingState.None;
 }
 
 public class MarkerManager : MonoBehaviour
 {
-    public static float fixedTimeThreshold = 0.6f;
+    public float fixedTimeThreshold = 0.3f;
 
     public static MarkerManager Instance;
     public List<TargetInfo> targetList;
     public float smoothTime = 0.1f;
-    public List<TargetInfo> targetPageInfos;
-    public GameObject btnPageReplay;
-    public XRReferenceImageLibrary trackingLibrary;
     private ARTrackedImageManager manager;
 
-    [HideInInspector]
-    public int currentPageIndex = 0;
+    private int currentPageIndex = -1;
     private Camera mainCam;
-    public List<TargetInfo> currentTrackingTargets;
 
     private void Awake()
     {
         Instance = this;
-        targetList.ForEach(t => {
-            if (!t.noClone) {
-                t.createdObj = Instantiate(t.targetPref);
-            } else {
-                t.createdObj = t.targetPref;
-            }
-            t.createdObj.SetActive(false);
-        });
-        targetPageInfos.ForEach(t => {
-            if (!t.noClone) {
-                t.createdObj = Instantiate(t.targetPref);
-            } else {
-                t.createdObj = t.targetPref;
-            }
-            t.createdObj.SetActive(false);
-        });
     }
 
     private void OnEnable()
     {
         manager = GetComponent<ARTrackedImageManager>();
-        ResetTrackingLibrary();
         manager.trackedImagesChanged += OnTrackedImagesChaged;
         mainCam = Camera.main;
-        // targetPageInfos = targetList.Where(t => t.pageOption.pageNumber >= 0).ToList();
-        RefreshCurretTrackingTargets();
     }
 
     private void OnDisable()
@@ -122,98 +96,79 @@ public class MarkerManager : MonoBehaviour
         manager.trackedImagesChanged -= OnTrackedImagesChaged;
     }
 
-    public void RefreshCurretTrackingTargets() {
-        currentTrackingTargets = new List<TargetInfo>(targetList);
-        targetPageInfos.ForEach(pi => currentTrackingTargets.Add(pi));
-        // currentTrackingTargets.Add(targetPageInfos[currentPageIndex]);
-    }
-
     private void OnTrackedImagesChaged(ARTrackedImagesChangedEventArgs args)
     {
         foreach (ARTrackedImage trackedImg in args.updated)
         {
-            foreach (TargetInfo target in currentTrackingTargets)
+            foreach (TargetInfo target in targetList)
             {
                 // 추적 목록에 포함된 이미지인지 체크
                 if (trackedImg.referenceImage.name != target.name) continue;
 
-                target.trackingState = trackedImg.trackingState;
-
                 bool shouldPlayAnim = false;
 
-                // 화면에 이미지가 보이는 경우
                 if (trackedImg.trackingState == TrackingState.Tracking)
                 {
-                    // 페이지가 아닌 오브젝트 또는 고정된 페이지면
-                    if (target.pageOption.pageNumber == -1 || target.isFixed) {
-
-                        if (!target.createdObj.activeSelf) {
-                            shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
-                            target.createdObj.transform.parent = trackedImg.transform;
-                            target.createdObj.transform.localPosition = Vector3.zero;
-                            target.createdObj.transform.localEulerAngles = Vector3.zero;
-                            target.createdObj.transform.parent = null;
-                            target.createdObj.SetActive(true);
-                        }
-                        
-                        if (shouldPlayAnim)
+                    // 화면에 이미지가 보이는 경우
+                    if (target.createdObj == null)
+                    {
+                        if (target.targetPref?.gameObject?.scene.name == null)
                         {
-                            ArAnimation anim = target.createdObj.GetComponent<ArAnimation>();
-                            if (anim == null) anim = target.createdObj.AddComponent<ArAnimation>();
-
-                            anim.StartAnim(target.appearAnimation);
+                            // 프리팹을 사용하는 경우
+                            // 오브젝트가 아직 생성되지 않았으면 새로 생성
+                            target.createdObj = Instantiate(target.targetPref);
                         }
+                        else
+                        {
+                            // 씬 오브젝트를 사용하는 경우
+                            // target 정보에 연결
+                            target.createdObj = target.targetPref;
+                            target.isSceneObject = true;
+                        }
+                        target.createdObj.transform.parent = trackedImg.transform;
+
+                        target.createdObj.transform.localPosition = Vector3.zero;
+                        target.createdObj.transform.localRotation = Quaternion.identity;
+
+                        target.createdObj.transform.parent = transform;
+
+                        shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
                     }
 
-                    if (!target.isFixed) {
-                        if (target.createdObj != null) {
-                            float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
+                    if (!target.createdObj.activeSelf) {
+                        shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
+                        target.createdObj.SetActive(true);
+                    }
+                    
+                    if (shouldPlayAnim)
+                    {
+                        ArAnimation anim = target.createdObj.GetComponent<ArAnimation>();
+                        if (anim == null) anim = target.createdObj.AddComponent<ArAnimation>();
 
-                            if (moveDistance <= 0.1f) {
-                                target.createdObj.transform.position = Vector3.SmoothDamp(
-                                    target.createdObj.transform.position, 
-                                    trackedImg.transform.position, 
-                                    ref target.positionVelocity, 
-                                    smoothTime
-                                );
-                            } else {
-                                target.createdObj.transform.position = trackedImg.transform.position;
-                            }
+                        anim.StartAnim(target.appearAnimation);
+                    }
 
-                            target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(
-                                target.createdObj.transform.rotation, 
-                                trackedImg.transform.rotation, 
-                                ref target.rotationVelocity, 
-                                smoothTime
-                            );
-                        }
+                    if (!target.isFixed || Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position) > 1)
+                    {
+                        // float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
+                        // if (moveDistance <= 0.1f) {
+                            target.createdObj.transform.position = Vector3.SmoothDamp(target.createdObj.transform.position, trackedImg.transform.position, ref target.positionVelocity, smoothTime);
+                        // } else {
+                            // target.createdObj.transform.position = trackedImg.transform.position;
+                        // }
 
-                        if (!target.enableTracking || target.pageOption.pageNumber >= 0) {
+                        target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(target.createdObj.transform.rotation, trackedImg.transform.rotation, ref target.rotationVelocity, smoothTime);
+
+                        if (!target.enableTracking) {
                             Vector3 viewportPoint = mainCam.WorldToViewportPoint(trackedImg.transform.position);
                             if (viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1) {
                                 target.showInScreenTime += Time.deltaTime;
                             } else {
                                 target.showInScreenTime = 0;
                             }
-
-                            if (!target.isFixed && target.showInScreenTime > fixedTimeThreshold) {
-                                target.isFixed = true;
-                                // 고정되는 타겟이 페이지이면 다른 페이지들 오브젝트 감춤                                
-                                if (target.pageOption.pageNumber >= 0) {
-                                    if (OnboardingUIManager.Instance.GetCurrentClipName().Contains("FindNextPage")) {
-                                        OnboardingUIManager.Instance.HideUiByName("FindNextPage");
-                                    }
-                                    ResetTrackingLibrary();
-                                    target.showInScreenTime = 0;
-                                    foreach(var pageInfo in targetPageInfos.Where(p => p.createdObj != null).ToArray()) {
-                                        if (pageInfo.pageOption.pageNumber == target.pageOption.pageNumber) continue;
-                                        pageInfo.isFixed = false;
-                                        pageInfo.showInScreenTime = 0;
-                                        CleanImageTrackingObj(pageInfo);
-                                    }
-                                }
-                            }
+                            target.isFixed = target.showInScreenTime > fixedTimeThreshold;
                         }
+
                     }
 
                     if (target.destroyCoroutine != null)
@@ -227,20 +182,16 @@ public class MarkerManager : MonoBehaviour
                         currentPageIndex = target.pageOption.pageNumber;
                     }
                 }
-                // 화면에서 이미지가 사라진 경우 
                 else
                 {
-                    target.showInScreenTime = 0;
-                    if (target.pageOption.isStatic) {
-                        if (target.createdObj != null) {
-                            target.createdObj.transform.parent = null;
-                        }
-                        continue;
-                    }
-                    
                     target.isFixed = false;
+                    target.showInScreenTime = 0;
+                    // // 화면에서 이미지가 사라진 경우 
+                    if (target.pageOption.isStatic) continue;
 
-                    CleanImageTrackingObj(target);
+                    if (target.createdObj != null) {
+                        CleanImageTrackingObj(target);
+                    }
 
                     if (target.destroyImmediately)
                     {
@@ -252,21 +203,6 @@ public class MarkerManager : MonoBehaviour
                     }
                 }
             }
-        }
-
-        btnPageReplay.SetActive(targetPageInfos.FirstOrDefault(pi => pi.createdObj && pi.createdObj.activeSelf) != null);
-    }
-
-    [ContextMenu("ResetCurrentPage")]
-    public void ResetCurrentPage() {
-        TargetInfo currentPage = targetPageInfos.FirstOrDefault(pi => pi.createdObj && pi.createdObj.activeSelf);
-        if (currentPage == null) {
-            Debug.LogError("열려있는 페이지가 없습니다");
-        } else {
-            GameObject newPageObj = Instantiate(currentPage.targetPref, currentPage.createdObj.transform.parent);
-            GameObject prevObj = currentPage.createdObj;
-            currentPage.createdObj = newPageObj;
-            Destroy(prevObj);
         }
     }
 
@@ -289,7 +225,17 @@ public class MarkerManager : MonoBehaviour
     }
 
     private void CleanImageTrackingObj(TargetInfo target) {
-        target.createdObj.SetActive(false);
+        // dontDestory가 체크되어 있거나, 프리팹이 아닌 씬 오브젝트를 사용한 경우 파괴하지 않고 비활성화
+        if (target.isSceneObject)
+        {
+            target.createdObj.SetActive(false);
+        }
+        else
+        {
+            // 만들어진 오브젝트가 있으면 파괴
+            Destroy(target.createdObj);
+            target.createdObj = null;
+        }
     }
 
     private IEnumerator IeDestroyTimer(TargetInfo target, float time = 3)
@@ -297,13 +243,5 @@ public class MarkerManager : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         DestroyImageTrackingObj(target);
-    }
-
-    public void ResetTrackingLibrary() {
-        manager.enabled = false;
-        manager.referenceLibrary = manager.CreateRuntimeLibrary(trackingLibrary);
-        manager.enabled = true;
-
-        targetPageInfos.ForEach(pi => pi.showInScreenTime = 0);
     }
 }

@@ -19,7 +19,7 @@ public class CardPlacement : MonoBehaviour
     public GameObject[] targetList;
     private GameObject prevInnerObj;
 
-    protected virtual void OnEnable() {
+    private void OnEnable() {
         points = transform.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name.Contains("Point")).ToArray();
     }
 

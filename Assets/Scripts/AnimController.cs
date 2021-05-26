@@ -9,7 +9,6 @@ public class AnimController : MonoBehaviour
     Animator wwAnim;
     Animator shAnim;
     public Page page;
-    public AudioSource wwRoar;
     public enum Page
     {
         AR1,
@@ -41,10 +40,10 @@ public class AnimController : MonoBehaviour
                 Three(); break;
             case Page.AR4:
                 Four(); break;
-            //    case Page.AR6:
-            //        Six(); break;
+        //    case Page.AR6:
+        //        Six(); break;
             case Page.AR7:
-                Seven(); break;
+               Seven(); break;
             case Page.AR8:
                 StartCoroutine(Eight()); break;
         }
@@ -54,7 +53,12 @@ public class AnimController : MonoBehaviour
     void One()
     {
         shAnim.SetTrigger("Waving");
-        wwAnim.SetTrigger("Roar");
+        count += Time.deltaTime;
+        if (count > 4)
+        {
+            wwAnim.SetTrigger("Roar");
+            count = 0;
+        }
     }
     bool check;
     IEnumerator Two()
@@ -66,7 +70,7 @@ public class AnimController : MonoBehaviour
             check = true;
         }
         yield return new WaitForSeconds(2.1f);
-        wangwang.transform.Translate(Vector3.forward * Time.deltaTime * 0.04f);
+        wangwang.transform.Translate(Vector3.forward * Time.deltaTime*0.3f);
     }
     void Three()
     {
@@ -86,12 +90,9 @@ public class AnimController : MonoBehaviour
     {
         //sh.transform.GetChild(1).gameObject.SetActive(false);
         wwAnim.SetTrigger("Power");
-        yield return new WaitForSeconds(4.1f);
-        //sh.transform.GetChild(0).gameObject.SetActive(true);
-        sh.transform.GetChild(0).GetComponent<AudioSource>().enabled = true;
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(2.1f);
+        sh.transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(6f);
         sh.transform.GetChild(1).gameObject.SetActive(true);
-        yield return new WaitForSeconds(.5f);
-        sh.transform.GetChild(1).GetComponent<AudioSource>().enabled = true;
     }
 }

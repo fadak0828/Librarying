@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class WangWangBusAnim : MonoBehaviour
 {
-    public GameObject dustPref;
     public void PlayAnim() {
         GetComponent<Animator>().Play("WangWangBus");
         // StartJumpAnim();

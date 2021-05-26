@@ -20,12 +20,9 @@ public class MazeCardPlace : MonoBehaviour
 
     public GameObject effectPref;
 
-    private AudioSource audioSource;
-
     private void Awake() {
         cardPivot = gameObject;
         // cards = GameObject.FindGameObjectsWithTag("MazeCard");
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -47,18 +44,11 @@ public class MazeCardPlace : MonoBehaviour
             }
             isCorrect = side == transform.forward && includeCard.name.Contains(answerName);
 
-            if (!includeCard.name.Contains(answerName) && !audioSource.isPlaying) {
-                audioSource.Stop();
-                audioSource.Play();
-            }
-
             if (!isCorrect) {
                 innerMazeCardModel.transform.parent = innerMazeCard.transform;
             } else {
                 GameObject effect = Instantiate(effectPref, transform);
                 effect.transform.localScale = Vector3.one * 15;
-                innerMazeCardModel.transform.localPosition = Vector3.zero;
-                innerMazeCardModel.transform.localRotation = Quaternion.identity;
             }
         } else {
             if (innerMazeCard != null) {

@@ -7,47 +7,33 @@ public class Maze_AR3 : MonoBehaviour
     public GameObject ww;
     public GameObject sh;
     public float moveSpeed = 0.1f;
-    public Collider startLine;
+    public GameObject startLine;
     public GameObject finishGate;
     public GameObject finishPosition;
-    public NextPageTimer nextPageUi;
     bool move;
     public bool finish;
     Rigidbody rig;
-
-    private AudioSource audioSource;
     private void Start()
     {
         Invoke("Move", 2.1f);
         rig = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        GetComponent<HlMazeCardPlace>().enabled = false;
+        Invoke("StartLine", 3.5f);
+        //finishZone.SetActive(false);
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         if (move == true)
         {
-            rig.MovePosition(transform.position + transform.forward * Time.deltaTime * moveSpeed);
+            transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
         }
-        if (finish == true)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, finishPosition.transform.position, .05f * Time.deltaTime);
-            if (Vector3.Distance(transform.position, finishPosition.transform.position) < 0.01f) {
-                finishPosition.SetActive(true);
-                finishPosition.GetComponent<AudioSource>().Play();
-                finish = false;
-                audioSource.Stop();
-                audioSource.Play();
-            }
-        }
+        if(finish==true)
+            transform.position = Vector3.MoveTowards(transform.position, finishPosition.transform.position, .2f * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "FinishLine")       //�̷� Ż�� ���ϸ��̼�     //��ƼŬ �߰��ϱ�
         {
-            GetComponent<HlMazeCardPlace>().enabled = false;
             ww.GetComponent<Animator>().SetTrigger("Finish");
             sh.GetComponent<Animator>().SetTrigger("Finish");
             GetComponent<Animator>().Play("MazeClear");
@@ -55,17 +41,6 @@ public class Maze_AR3 : MonoBehaviour
             finishGate.GetComponent<Animator>().enabled = true;
             move = false;
             finish = true;
-
-            nextPageUi.enabled = true;
-            other.gameObject.SetActive(false);
-        }
-
-    }
-
-    private void OnTriggerExit(Collider ohter) {
-        if (ohter.gameObject.name == "StartLine") {
-            startLine.isTrigger = false;
-            GetComponent<HlMazeCardPlace>().enabled = true;
         }
     }
 
@@ -82,6 +57,11 @@ public class Maze_AR3 : MonoBehaviour
     void Move()
     {
         move = true;
+    }
+
+    void StartLine()
+    {
+        startLine.GetComponent<BoxCollider>().enabled = true;
     }
 }
 
