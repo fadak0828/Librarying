@@ -7,6 +7,7 @@ public class MazeMap : MonoBehaviour
 {
     public WangWangBusAnim wangwangBusAnim;
     public MazeCardPlace[] mazeCardPlaces;
+    public GameObject clearEffect;
     public bool allCorrectPlaced = false;
     private AudioSource audioSource;
 
@@ -34,6 +35,7 @@ public class MazeMap : MonoBehaviour
     private void PlayVoice() {
         audioSource.Stop();
         audioSource.Play();
+        clearEffect.SetActive(true);
     }
 
     private void ShowFindNextUI() {
