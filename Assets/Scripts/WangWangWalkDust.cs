@@ -10,6 +10,7 @@ public class WangWangWalkDust : MonoBehaviour
     public Vector3 positionOffset;
     public float scaleOffset;
     public AudioClip walkSfxClip;
+    public bool notWalking;
     private AudioSource audioSource;
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
@@ -19,7 +20,9 @@ public class WangWangWalkDust : MonoBehaviour
         audioSource.playOnAwake = false;
         audioSource.loop = false;
         audioSource.pitch = 1.2f;
-        audioSource.clip = walkSfxClip;
+        if (!notWalking) {
+            audioSource.clip = walkSfxClip;
+        }
     }
 
     private void CreateDust(Transform landedFootTransform) {
