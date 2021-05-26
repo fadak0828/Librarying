@@ -49,6 +49,8 @@ public class ArSceneManager : MonoBehaviour
     private void Update() {
         if (markerManager.targetPageInfos?.Count > 0) {
             onboadringUIManager.loadingPercentage = markerManager.targetPageInfos.Max(p => p.showInScreenTime) / MarkerManager.fixedTimeThreshold;
+        } else {
+            onboadringUIManager.loadingPercentage = 0;
         }
         OnState(state);
     }
