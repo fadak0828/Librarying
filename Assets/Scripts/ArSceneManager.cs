@@ -69,7 +69,7 @@ public class ArSceneManager : MonoBehaviour
                 }
 
                 if (trackedCount > 0) {
-                    if (onboadringUIManager.GetCurrentClipName() == "OnFindBook") {
+                    if (onboadringUIManager.GetCurrentClipName() == "OnFindBook" || onboadringUIManager.GetCurrentClipName() == "EnterFindBook") {
                         onboadringUIManager.HideUiByName("FindBook");
                     }
                     state = ArSceneState.IDLE;
