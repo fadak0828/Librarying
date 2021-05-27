@@ -204,11 +204,12 @@ public class MarkerManager : MonoBehaviour
                                         OnboardingUIManager.Instance.HideUiByName("FindNextPage");
                                     }
                                     ResetTrackingLibrary();
-                                    target.showInScreenTime = 0;
+
+                                    targetPageInfos.ForEach(pi => pi.showInScreenTime = 0);
+
                                     foreach(var pageInfo in targetPageInfos.Where(p => p.createdObj != null).ToArray()) {
                                         if (pageInfo.pageOption.pageNumber == target.pageOption.pageNumber) continue;
                                         pageInfo.isFixed = false;
-                                        pageInfo.showInScreenTime = 0;
                                         CleanImageTrackingObj(pageInfo);
                                     }
                                 }
