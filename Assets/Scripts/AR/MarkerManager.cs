@@ -36,17 +36,26 @@ public class TargetInfo
 {
     [Tooltip("ImageLibrary에 등록된 이미지 이름")]
     public string name;
+
+    [Tooltip("오브젝트가 나타날 때 실행될 애니메이션 default: NONE")]
     public ArAnimationType appearAnimation;
+
+    [Tooltip("오브젝트가 사라질 때 실행될 애니메이션 default: NONE")]
     public ArAnimationType disappearAnimation;
 
+    [Tooltip("인식된 마커가 책 페이지인지?")]
     public PageOption pageOption = new PageOption(-1, false);
 
     [Tooltip("이미지를 따라서 위치 변경할 것인지?")]
     public bool enableTracking = true;
 
+    [Tooltip("마커 인식이 끊기면 오브젝트를 바로 파괴할 것인지?")]
     public bool destroyImmediately = true;
 
+    [Tooltip("마커 인식시 나타낼 게임오브젝트")]
     public GameObject targetPref;
+
+    [Tooltip("targetPref을 복사하지 않고 그대로 사용할 것 인지?")]
     public bool noClone = false;
 
     [HideInInspector]
@@ -74,9 +83,12 @@ public class MarkerManager : MonoBehaviour
     public static float fixedTimeThreshold = 0.6f;
 
     public static MarkerManager Instance;
-    public List<TargetInfo> targetList;
     public float smoothTime = 0.1f;
+
+    public List<TargetInfo> targetList;
     public List<TargetInfo> targetPageInfos;
+    public List<TargetInfo> currentTrackingTargets;
+
     public GameObject btnPageReplay;
     public XRReferenceImageLibrary trackingLibrary;
     private ARTrackedImageManager manager;
@@ -84,27 +96,19 @@ public class MarkerManager : MonoBehaviour
     [HideInInspector]
     public int currentPageIndex = 0;
     private Camera mainCam;
-    public List<TargetInfo> currentTrackingTargets;
 
     private void Awake()
     {
         Instance = this;
-        targetList.ForEach(t => {
-            if (!t.noClone) {
-                t.createdObj = Instantiate(t.targetPref);
-            } else {
-                t.createdObj = t.targetPref;
-            }
-            t.createdObj.SetActive(false);
-        });
-        targetPageInfos.ForEach(t => {
-            if (!t.noClone) {
-                t.createdObj = Instantiate(t.targetPref);
-            } else {
-                t.createdObj = t.targetPref;
-            }
-            t.createdObj.SetActive(false);
-        });
+        targetList
+            .Concat(targetPageInfos)
+            .ToList()
+            .ForEach(t => {
+                if (!t.noClone) t.createdObj = Instantiate(t.targetPref);
+                else t.createdObj = t.targetPref;
+
+                t.createdObj.SetActive(false);
+            });
     }
 
     private void OnEnable()
@@ -113,7 +117,6 @@ public class MarkerManager : MonoBehaviour
         ResetTrackingLibrary();
         manager.trackedImagesChanged += OnTrackedImagesChaged;
         mainCam = Camera.main;
-        // targetPageInfos = targetList.Where(t => t.pageOption.pageNumber >= 0).ToList();
         RefreshCurretTrackingTargets();
     }
 
@@ -147,6 +150,7 @@ public class MarkerManager : MonoBehaviour
                     // 페이지가 아닌 오브젝트 또는 고정된 페이지면
                     if (target.pageOption.pageNumber == -1 || target.isFixed) {
 
+                        // 오브젝트가 나타나는 프레임이면 오브젝트 초기화
                         if (!target.createdObj.activeSelf) {
                             shouldPlayAnim = target.appearAnimation != ArAnimationType.NONE;
                             target.createdObj.transform.parent = trackedImg.transform;
@@ -156,6 +160,7 @@ public class MarkerManager : MonoBehaviour
                             target.createdObj.SetActive(true);
                         }
                         
+                        // appear/disappear 애니메이션 재생처리
                         if (shouldPlayAnim)
                         {
                             ArAnimation anim = target.createdObj.GetComponent<ArAnimation>();
@@ -165,10 +170,13 @@ public class MarkerManager : MonoBehaviour
                         }
                     }
 
+                    // 마커가 고정되지 않았으면
                     if (!target.isFixed) {
+                        // 오브젝트가 나타나있는 상태면
                         if (target.createdObj != null) {
                             float moveDistance = Vector3.Distance(target.createdObj.transform.position, trackedImg.transform.position);
 
+                            // 일정거리 이하에서는 오브젝트가 부드럽게 마커를 따라가게 해서 오브젝트가 떨리는 증상을 방지
                             if (moveDistance <= 0.1f) {
                                 target.createdObj.transform.position = Vector3.SmoothDamp(
                                     target.createdObj.transform.position, 
@@ -180,6 +188,7 @@ public class MarkerManager : MonoBehaviour
                                 target.createdObj.transform.position = trackedImg.transform.position;
                             }
 
+                            // 오브젝트 회전 부드럽게
                             target.createdObj.transform.rotation = QuaternionUtil.SmoothDamp(
                                 target.createdObj.transform.rotation, 
                                 trackedImg.transform.rotation, 
@@ -188,6 +197,7 @@ public class MarkerManager : MonoBehaviour
                             );
                         }
 
+                        // 페이지 마커이거나 오브젝트가 마커를 따라다니지 않아도 되는 경우 처리
                         if (!target.enableTracking || target.pageOption.pageNumber >= 0) {
                             Vector3 viewportPoint = mainCam.WorldToViewportPoint(trackedImg.transform.position);
                             if (viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1) {
@@ -258,6 +268,7 @@ public class MarkerManager : MonoBehaviour
         btnPageReplay.SetActive(targetPageInfos.FirstOrDefault(pi => pi.createdObj && pi.createdObj.activeSelf) != null);
     }
 
+    // 현재 추적중인 페이지의 타겟 오브젝트를 파괴한다
     [ContextMenu("ResetCurrentPage")]
     public void ResetCurrentPage() {
         TargetInfo currentPage = targetPageInfos.FirstOrDefault(pi => pi.createdObj && pi.createdObj.activeSelf);
@@ -273,19 +284,18 @@ public class MarkerManager : MonoBehaviour
 
     private void DestroyImageTrackingObj(TargetInfo target)
     {
-        if (target.createdObj != null)
-        {
-            if (target.disappearAnimation != ArAnimationType.NONE)
-            {
-                ArAnimation anim = target.createdObj.GetComponent<ArAnimation>();
-                if (anim == null) anim = target.createdObj.AddComponent<ArAnimation>();
-                
-                if (anim.IsPlaying()) return;
+        if (target.createdObj == null) return;
 
+        if (target.disappearAnimation != ArAnimationType.NONE)
+        {
+            ArAnimation anim = target.createdObj.GetComponent<ArAnimation>();
+            if (anim == null) 
+                anim = target.createdObj.AddComponent<ArAnimation>();
+                
+            if (!anim.IsPlaying()) 
                 anim.StartAnim(target.disappearAnimation, () => CleanImageTrackingObj(target));
-            } else {
-                CleanImageTrackingObj(target);
-            }
+        } else {
+            CleanImageTrackingObj(target);
         }
     }
 
@@ -300,6 +310,8 @@ public class MarkerManager : MonoBehaviour
         DestroyImageTrackingObj(target);
     }
 
+    // 페이지 넘길 때 이전 페이지가 추적 중인것으로 나타나는 버그 때문에
+    // referenceLibrary 초기화 필요
     public void ResetTrackingLibrary() {
         manager.enabled = false;
         manager.referenceLibrary = manager.CreateRuntimeLibrary(trackingLibrary);

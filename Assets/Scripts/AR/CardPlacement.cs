@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Linq;
 
 
-// 미로카드 놓는 자리
 public class CardPlacement : MonoBehaviour
 {
     public bool isCorrect;
